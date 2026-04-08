@@ -1,70 +1,104 @@
-# vue-project
+# vue-govbr-if
 
-This template should help get you started developing with Vue 3 in Vite.
+Guia rapido para estagiario subir o projeto com Docker.
 
-## Recommended IDE Setup
+## Objetivo
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Subir o ambiente de desenvolvimento em container e acessar a aplicacao no browser em http://localhost:5173.
 
-## Recommended Browser Setup
+## Pre-requisitos
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+1. Docker instalado e funcionando.
+2. Docker Compose habilitado (comando docker compose).
+3. Porta 5173 livre na maquina.
 
-## Type Support for `.vue` Imports in TS
+## Como subir os containers
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+1. Entre na pasta do projeto.
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```bash
+cd /caminho/para/vue-govbr-if
 ```
 
-### Compile and Hot-Reload for Development
+2. Suba o servico em modo foreground (para ver logs).
 
-```sh
-npm run dev
+```bash
+docker compose up --build
 ```
 
-### Type-Check, Compile and Minify for Production
+3. Aguarde a instalacao das dependencias e a mensagem do Vite indicando que o servidor iniciou.
 
-```sh
-npm run build
+4. Abra no browser:
+
+http://localhost:5173
+
+## Rodar em background
+
+Se quiser deixar o terminal livre:
+
+```bash
+docker compose up -d --build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+Para acompanhar logs:
 
-```sh
-npm run test:unit
+```bash
+docker compose logs -f app
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+## Como parar o ambiente
 
-```sh
-npm run test:e2e:dev
+Parar e remover os containers:
+
+```bash
+docker compose down
 ```
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+## Comandos uteis
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+Ver status dos containers:
 
-```sh
-npm run build
-npm run test:e2e
+```bash
+docker compose ps
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Reiniciar apenas o app:
 
-```sh
-npm run lint
+```bash
+docker compose restart app
 ```
+
+Recriar do zero (build limpo):
+
+```bash
+docker compose down
+docker compose up --build
+```
+
+## Problemas comuns
+
+1. Porta 5173 ocupada
+
+- Erro comum: bind: address already in use.
+- Solucao: parar o processo que usa a porta ou trocar o mapeamento no arquivo docker-compose.yml.
+
+2. Browser abre, mas pagina nao carrega
+
+- Verifique se o container esta em execucao com docker compose ps.
+- Veja logs com docker compose logs -f app.
+- Confirme que esta acessando http://localhost:5173.
+
+3. Dependencias quebradas no container
+
+- Rode um rebuild completo:
+
+```bash
+docker compose down
+docker compose up --build
+```
+
+## Estrutura Docker usada no projeto
+
+- Dockerfile: usa imagem node:24.14.1-slim.
+- docker-compose.yml: publica 5173:5173 e monta o codigo em /app.
+- .docker/entrypoint.sh: executa npm install e inicia Vite com host 0.0.0.0 na porta 5173.
