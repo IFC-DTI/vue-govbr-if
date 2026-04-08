@@ -1,20 +1,21 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+Como um [tipo de usuário], eu quero [ objetivo ] para eu [ benefício recebido ].
 
----
+## Objetivo do usuário final
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+[ descreva aqui ]
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## Objetivo final de negócio
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+[ descreva aqui ]
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+
+## Critérios de aceitação:
+
+* [ defina alguns requisitos iniciais da funcionalidade  ]
+* [ servem como esboço, para serem discutidos por wireframe, fluxos, etc, serão definidos antes de iniciar o desenvolvimento ]
+* [ use medidas de sucesso, elas podem prova a história e que ela atingiu o seu objetivo ]
+
+
+## Casos de Testes
+
+[ Aqui você pode descreve cenários de testes, que deverão passar ]
