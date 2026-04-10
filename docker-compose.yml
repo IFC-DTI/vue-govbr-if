@@ -1,9 +1,10 @@
 services:
   app:
-    build: .
+    build:
+      context: .  
     ports:
       - "5173:5173"
     volumes:
       - .:/app
     environment:
-      - NODE_ENV=development  
+      - NODE_ENV=development
