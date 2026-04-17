@@ -3,9 +3,9 @@
     <!-- skip-links -->
     <Header />
     <!-- area do conteudo -->
-    <main id="main" class="d-flex flex-fill">
-      <div class="container-lg d-flex">
-        <div class="row">
+    <main id="main">
+      <div>
+        <div>
           <Menu />
           <div class="col pt-3 pb-5"></div>
           <div id="main-content" class="main-content pl-sm-3">

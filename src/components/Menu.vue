@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import CollapseMenu from './CollapseMenu.vue'
+</script>
+
 <template>
   <!-- <br-menu density="medium" aria-label="Menu médio" breakpoints="col-sm-4 col-lg-3">
     <br-menu-header
@@ -21,7 +25,66 @@
 
     <br-menu-item divider icon="heart" href="#"> Favoritos </br-menu-item>
   </br-menu> -->
-  <div>
-    
+  <div class="menu">
+    <div class="menu-content">
+      <div class="menu-header">
+        <img src="@/assets/govbr.svg" alt="Logo Gov.br" class="menu-logo" />
+        <i class="fas fa-times"></i>
+      </div>
+      <!-- <br-collapse>
+        <div slot="trigger" style="display: flex; gap: 1em;"><i class="fas fa-bell"></i>Agrupamento do Menu 1</div>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste facere neque quidem eligendi
+        unde quisquam sunt, totam, atque eos eum voluptatem debitis! Illum, commodi expedita?
+        Consequuntur libero laborum iste fugiat.
+      </br-collapse> -->
+      <CollapseMenu
+        group-title="Agrupamento do Menu 1"
+        group-icon="fas fa-bell"
+        :sub-collapses="[
+          {
+            id: 1,
+            label: 'Submenu 1',
+            icon: 'fas fa-file',
+            itens: [{ id: 1, label: 'Usuários', link: '#', icon: 'fas fa-file' }],
+          },
+          {
+            id: 2,
+            label: 'Submenu 2',
+            icon: 'fas fa-file',
+            itens: [{ id: 2, label: 'Admins', link: '#', icon: 'fas fa-user' }],
+          },
+        ]"
+      />
+    </div>
   </div>
 </template>
+
+<style>
+* {
+  color: #2864ae;
+}
+.menu {
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  background-color: #a1a1a1a7;
+  height: 100vh;
+  width: 100%;
+}
+
+.menu-content {
+  background-color: #fff;
+  width: 20%;
+  height: 100%;
+}
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 2em;
+  border-bottom: 1px solid #cccccc;
+  img {
+    max-width: 100px;
+  }
+}
+</style>
