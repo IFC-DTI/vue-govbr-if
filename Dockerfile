@@ -6,6 +6,6 @@ RUN groupadd -g 1001 appuser \
 
 WORKDIR /app
 
-USER appuser
+USER node
 
 ENTRYPOINT [ "sh", ".docker/entrypoint.sh" ]

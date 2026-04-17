@@ -1,14 +1,24 @@
 <template>
   <div class="template-base">
     <!-- skip-links -->
-    <HeaderComponent />
+    <Header />
     <!-- area do conteudo -->
-     <main>
-      <slot />
-     </main>
+    <main id="main" class="d-flex flex-fill">
+      <div class="container-lg d-flex">
+        <div class="row">
+          <Menu />
+          <div class="col pt-3 pb-5"></div>
+          <div id="main-content" class="main-content pl-sm-3">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer id="footer" class="footer"></footer>
   </div>
 </template>
 
 <script setup lang="ts">
-import HeaderComponent from '@/components/HeaderComponent.vue'
+import Header from '@/components/Header.vue'
+import Menu from '@/components/Menu.vue'
 </script>
