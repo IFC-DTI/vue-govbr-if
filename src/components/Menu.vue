@@ -29,7 +29,7 @@ import CollapseMenu from './CollapseMenu.vue'
     <div class="menu-content">
       <div class="menu-header">
         <img src="@/assets/govbr.svg" alt="Logo Gov.br" class="menu-logo" />
-        <i class="fas fa-times"></i>
+        <i @click="$emit('closeMenu')" class="close fas fa-times"></i>
       </div>
       <!-- <br-collapse>
         <div slot="trigger" style="display: flex; gap: 1em;"><i class="fas fa-bell"></i>Agrupamento do Menu 1</div>
@@ -81,10 +81,14 @@ import CollapseMenu from './CollapseMenu.vue'
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1em 2em;
+  padding: 1em 1em;
   border-bottom: 1px solid #cccccc;
   img {
     max-width: 100px;
   }
+}
+
+.close {
+  cursor: pointer;
 }
 </style>

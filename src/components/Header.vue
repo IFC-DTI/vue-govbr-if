@@ -36,7 +36,7 @@
       emphasis="tertiary"
       aria-label="Abrir menu"
     >
-      <br-icon icon-name="fa7-solid:align-justify"></br-icon>
+      <br-icon icon-name="fa7-solid:align-justify" @click="$emit('startMenu')"></br-icon>
     </br-button>
 
     <span slot="caption">Título do Header</span>
