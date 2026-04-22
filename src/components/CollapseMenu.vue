@@ -38,7 +38,7 @@
           </div>
 
           <div class="br-list no-border-list">
-            <template v-for="(item, itemIndex) in sub.itens" :key="item.id">
+            <template v-for="(item) in sub.itens" :key="item.id">
               <a class="br-item border-0 ml-4" role="button">
                 <div class="row align-items-center">
                   <div class="col-auto">
@@ -58,7 +58,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const props = defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  subCollapses: () => [],
+})
 
 const hoveredId = ref<string | null>(null)
 
