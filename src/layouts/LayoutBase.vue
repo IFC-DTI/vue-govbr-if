@@ -1,12 +1,12 @@
 <template>
   <div class="template-base">
     <!-- skip-links -->
-    <Header @startMenu="startMenu" />
+    <AppHeader @startMenu="startMenu" />
     <!-- area do conteudo -->
     <main id="main">
       <div>
         <div>
-          <Menu @closeMenu="closeMenu" v-if="menuAberto" />
+          <MenuBar @closeMenu="closeMenu" v-if="menuAberto" />
           <div class="col pt-3 pb-5"></div>
           <div id="main-content" class="main-content pl-sm-3">
             <slot />
@@ -19,8 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import Header from '@/components/Header.vue'
-import Menu from '@/components/Menu.vue'
+import AppHeader from '@/components/AppHeader.vue'
+import MenuBar from '@/components/MenuBar.vue'
 import { ref } from 'vue'
 
 const menuAberto = ref(false)

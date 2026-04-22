@@ -26,10 +26,11 @@ import CollapseMenu from './CollapseMenu.vue'
     <br-menu-item divider icon="heart" href="#"> Favoritos </br-menu-item>
   </br-menu> -->
   <div class="menu">
+    <div class="fundo-menu" @click="$emit('closeMenu')"></div>
     <div class="menu-content">
       <div class="menu-header">
         <img src="@/assets/govbr.svg" alt="Logo Gov.br" class="menu-logo" />
-        <i @click="$emit('closeMenu')" class="close fas fa-times"></i>
+        <br-icon @click="$emit('closeMenu')" class="close" icon-name="fa-solid:times"></br-icon>
       </div>
       <!-- <br-collapse>
         <div slot="trigger" style="display: flex; gap: 1em;"><i class="fas fa-bell"></i>Agrupamento do Menu 1</div>
@@ -67,15 +68,26 @@ import CollapseMenu from './CollapseMenu.vue'
   position: absolute;
   top: 0;
   z-index: 1000;
-  background-color: #a1a1a1a7;
   height: 100vh;
   width: 100%;
+}
+
+.fundo-menu {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #a1a1a1a7;
 }
 
 .menu-content {
   background-color: #fff;
   width: 20%;
   height: 100%;
+  z-index: 500;
+  position: absolute;
 }
 .menu-header {
   display: flex;
@@ -90,5 +102,12 @@ import CollapseMenu from './CollapseMenu.vue'
 
 .close {
   cursor: pointer;
+  min-width: 2em;
+  min-height: 2em;
+  border-radius: 50%;
+  &:hover {
+    background-color: #c5d4eb;
+    box-shadow: 0 0 0 2px #b4c8e6;
+  }
 }
 </style>
