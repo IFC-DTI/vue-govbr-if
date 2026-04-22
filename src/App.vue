@@ -9,4 +9,5 @@ import LayoutBase from './layouts/LayoutBase.vue'
   </LayoutBase>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
