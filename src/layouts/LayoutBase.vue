@@ -7,9 +7,11 @@
       <div>
         <div>
           <MenuBar @closeMenu="closeMenu" v-if="menuAberto" />
-          <div class="col pt-3 pb-5"></div>
-          <div id="main-content" class="main-content pl-sm-3">
-            <slot />
+          <div class="col pt-3 pb-5">
+            <AppBreadcrumb />
+            <div id="main-content" class="main-content pl-sm-3">
+              <slot />
+            </div>
           </div>
         </div>
       </div>
@@ -19,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+import AppBreadcrumb from '@/components/AppBreadcrumb.vue'
 import AppFooter from '@/components/AppFooter.vue'
 import AppHeader from '@/components/AppHeader.vue'
 import MenuBar from '@/components/MenuBar.vue'

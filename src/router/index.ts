@@ -7,6 +7,9 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('@/views/PaginaInicial.vue'),
+      meta: {
+        breadcrumb: 'Inicio',
+      },
     },
   ],
 })
