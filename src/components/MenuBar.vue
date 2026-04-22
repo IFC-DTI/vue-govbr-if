@@ -65,11 +65,11 @@ import CollapseMenu from './CollapseMenu.vue'
   color: #2864ae;
 }
 .menu {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  inset: 0;
   z-index: 1000;
-  height: 100vh;
-  width: 100%;
+  height: 100dvh;
+  width: 100vw;
 }
 
 .fundo-menu {

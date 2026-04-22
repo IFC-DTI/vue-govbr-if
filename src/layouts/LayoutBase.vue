@@ -14,11 +14,12 @@
         </div>
       </div>
     </main>
-    <footer id="footer" class="footer"></footer>
+    <AppFooter />
   </div>
 </template>
 
 <script setup lang="ts">
+import AppFooter from '@/components/AppFooter.vue'
 import AppHeader from '@/components/AppHeader.vue'
 import MenuBar from '@/components/MenuBar.vue'
 import { ref } from 'vue'
@@ -33,3 +34,15 @@ const closeMenu = () => {
   menuAberto.value = false
 }
 </script>
+
+<style scoped>
+.template-base {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#main {
+  flex: 1;
+}
+</style>
