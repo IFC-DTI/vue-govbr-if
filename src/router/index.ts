@@ -19,6 +19,14 @@ const router = createRouter({
         breadcrumb: 'Dashboard administrativo',
       },
     },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: () => import('@/views/ViewNotFound.vue'),
+      meta: {
+        breadcrumb: 'Página Não Encontrada',
+      },
+    }
   ],
 })
 
