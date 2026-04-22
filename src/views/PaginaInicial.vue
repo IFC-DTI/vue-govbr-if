@@ -9,8 +9,14 @@
 
     <h1>Olá {{ nome }}</h1>
   </div>
-  <div style="display: flex;
-  flex-direction: column; align-items: center; justify-content: space-between;">
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    "
+  >
     <br-button @click="() => contador++" shape="block">Clique aqui</br-button>
     <h2>{{ contador }}</h2>
   </div>

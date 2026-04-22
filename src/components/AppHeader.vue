@@ -1,12 +1,10 @@
 <template>
   <br-header title="IFC" subtitle="Instituto Federal Catarinense" :compact="false" density="medium">
-    <br-header-logo slot="logo" src="assets/images/govbr.svg"></br-header-logo>
-
-    <span slot="signature">Assinatura</span>
+    <br-header-logo slot="logo" src="assets/images/Logo_IFC_horizontal.png"></br-header-logo>
 
     <br-header-list slot="links" list-title="Acesso Rápido">
-      <br-header-link href="javascript:void(0)">Link de Acesso 1</br-header-link>
-      <br-header-link href="javascript:void(0)">Link de Acesso 2</br-header-link>
+      <br-header-link href="https://ifc.edu.br">Página IFC</br-header-link>
+      <br-header-link href="/administracao">Administração</br-header-link>
     </br-header-list>
 
     <br-header-list slot="functions" list-title="Funcionalidades do Sistema">
@@ -39,7 +37,7 @@
       <br-icon icon-name="fa7-solid:align-justify" @click="$emit('startMenu')"></br-icon>
     </br-button>
 
-    <span slot="caption">Título do Header</span>
-    <span slot="subcaption">Subtítulo do Header</span>
+    <span slot="caption">Instituto Federal Catarinense</span>
+    <span slot="subcaption">Página Oficial</span>
   </br-header>
 </template>

@@ -2,7 +2,7 @@
   <br-footer>
     <br-footer-logo
       slot="logo"
-      src="assets/images/govbr.svg"
+      src="assets/images/Logo_IFC_horizontal.png"
       description="Logo do Site"
     ></br-footer-logo>
     <br-footer-category label="Categoria">
