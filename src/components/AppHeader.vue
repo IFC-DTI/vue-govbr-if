@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import InputWithIcon from './InputWithIcon.vue'
+</script>
+
 <template>
   <br-header title="IFC" subtitle="Instituto Federal Catarinense" :compact="false" density="medium">
     <br-header-logo slot="logo" src="/assets/images/Logo_IFC_horizontal.png"></br-header-logo>
@@ -18,9 +22,13 @@
       </br-header-function>
     </br-header-list>
 
-    <br-input slot="search" placeholder="O que você procura?" is-highlight action-label="Buscar">
-      <br-icon slot="action" icon-name="fa-solid:search" aria-hidden="true"></br-icon>
-    </br-input>
+    <InputWithIcon
+      placeholder="O que você procura?"
+      action-label="Buscar"
+      density="large"
+      icon="fa-solid:search"
+      :highlight="true"
+    />
 
     <br-sign-in slot="access" label="Entrar" density="small">
       <br-icon slot="icon" icon-name="fa6-solid:user"></br-icon>

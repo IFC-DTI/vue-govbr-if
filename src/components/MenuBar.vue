@@ -7,7 +7,7 @@ import CollapseMenu from './CollapseMenu.vue'
     <div class="fundo-menu" @click="$emit('closeMenu')"></div>
     <div class="menu-content">
       <div class="menu-header">
-        <img src="/assets/images/Logo_IFC_horizontal.png" alt="Logo Gov.br" class="menu-logo" />
+        <img src="@/assets/Logo_IFC_horizontal.png" alt="Logo Gov.br" class="menu-logo" />
         <br-icon @click="$emit('closeMenu')" class="close" icon-name="fa-solid:times"></br-icon>
       </div>
 

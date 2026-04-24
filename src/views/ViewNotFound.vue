@@ -29,15 +29,13 @@
     <div class="row my-5">
       <div class="col">
         <p class="h5 text-semi-bold">Aproveite para fazer uma nova busca</p>
-        <br-input
-          slot="search"
+        <InputWithIcon
           placeholder="O que você procura?"
-          is-highlight
           action-label="Buscar"
           density="large"
-        >
-          <br-icon slot="action" icon-name="fa-solid:search" aria-hidden="true"></br-icon>
-        </br-input>
+          icon="fa-solid:search"
+          :highlight="true"
+        />
       </div>
     </div>
 
@@ -68,6 +66,7 @@
 </template>
 
 <script setup lang="ts">
+import InputWithIcon from '@/components/InputWithIcon.vue'
 import { useRouter, type Router } from 'vue-router'
 
 const router: Router = useRouter()
