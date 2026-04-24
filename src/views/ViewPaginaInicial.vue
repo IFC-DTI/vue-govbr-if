@@ -1,70 +1,98 @@
 <template>
-  <main>
-    <section>
-      <br-message state="info" show-icon>
-        Bem-vindo ao Instituto Federal Catarinense. Educacao publica, gratuita e de qualidade.
-      </br-message>
-    </section>
+  <main class="pagina-inicial my-5">
+    <br-card class="rounded">
+      <div class="logo-wrapper">
+        <img :src="souIfcLogo" alt="SOU IFC" class="logo-principal" />
+      </div>
 
-    <section>
-      <br-card>
-        <h1>Instituto Federal Catarinense</h1>
-        <p>
-          O IFC integra a Rede Federal de Educacao Profissional, Cientifica e Tecnologica,
-          promovendo formacao cidada, inclusao social e desenvolvimento regional.
+      <div class="texto-principal mt-5 p-5">
+        <p class="descricao">
+          Preparamos um ambiente onde você pode começar sua jornada no IFC de maneira tranquila!
+          Aqui você conseguirá criar sua conta de e-mail, office e demais sistemas que você
+          gostaria.
         </p>
-        <br-tag>Ensino</br-tag>
-        <br-tag>Pesquisa</br-tag>
-        <br-tag>Extensao</br-tag>
-        <br-divider></br-divider>
-        <ContainerBotoes>
-          <br-button emphasis="primary">Conheca o IFC</br-button>
-          <br-button emphasis="secondary">Nossos Campi</br-button>
-        </ContainerBotoes>
-      </br-card>
-    </section>
 
-    <section>
-      <br-card>
-        <h2>IFC em Numeros</h2>
-        <br-list>
-          <br-item>Mais de 10 campi em Santa Catarina</br-item>
-          <br-item>Cursos tecnicos, de graduacao e pos-graduacao</br-item>
-          <br-item>Projetos de pesquisa e extensao em todas as regioes</br-item>
-        </br-list>
-      </br-card>
-    </section>
+        <p class="descricao">Tudo isso, com a sua conta do gov.br!</p>
 
-    <section>
-      <br-card>
-        <h2>Comunicacao Institucional</h2>
-        <br-message state="success" show-icon>
-          Acompanhe noticias, editais, eventos e comunicados oficiais nos canais do IFC.
-        </br-message>
-        <ContainerBotoes>
-          <br-button emphasis="primary">Ver Noticias</br-button>
-          <br-button emphasis="secondary">Acessar Editais</br-button>
-        </ContainerBotoes>
-      </br-card>
-    </section>
-
-    <section>
-      <br-card>
-        <h2>Fale com o IFC</h2>
-        <p>
-          Para informacoes institucionais, utilize os canais oficiais de atendimento e ouvidoria.
-        </p>
-        <ContainerBotoes>
-          <br-button emphasis="secondary">Contato</br-button>
-          <br-button emphasis="tertiary">Ouvidoria</br-button>
-        </ContainerBotoes>
-      </br-card>
-    </section>
+        <div class="botoes-section">
+          <br-button emphasis="primary" @click="entrarComGovBr"> Entrar com gov.br</br-button>
+        </div>
+      </div>
+    </br-card>
   </main>
 </template>
 
 <script setup lang="ts">
-import ContainerBotoes from '@/components/ContainerBotoes.vue'
+import souIfcLogo from '@/assets/sou-ifc-logo.png'
+
+const entrarComGovBr = (): void => {
+  // TODO: Implementar redirecionamento para autenticação gov.br
+  console.log('Redirecionando para autenticação gov.br')
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+.pagina-inicial {
+  margin: 0 5em;
+  border-radius: 5em;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-principal {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+}
+
+.texto-principal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.descricao {
+  font-size: 1.6em;
+  font-weight: 100;
+}
+
+.botoes-section {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media (max-width: 992px) {
+  .logo-wrapper {
+    order: -1;
+  }
+
+  .descricao-main {
+    font-size: 1rem;
+  }
+
+  .descricao-destaque {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .botoes-section {
+    flex-direction: column;
+  }
+
+  .botoes-section br-button {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .logo-principal {
+    max-height: 200px;
+  }
+}
+</style>
