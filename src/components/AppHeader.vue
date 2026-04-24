@@ -42,7 +42,7 @@ import InputWithIcon from './InputWithIcon.vue'
       emphasis="tertiary"
       aria-label="Abrir menu"
     >
-      <br-icon icon-name="fa7-solid:align-justify" @click="$emit('startMenu')"></br-icon>
+      <br-icon icon-name="fa7-solid:bars" @click="$emit('startMenu')"></br-icon>
     </br-button>
 
     <span slot="caption">Instituto Federal Catarinense</span>
