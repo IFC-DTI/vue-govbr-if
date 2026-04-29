@@ -5,12 +5,12 @@
     </div>
 
     <div class="texto-principal mt-5 p-5">
-      <p class="descricao">
+      <h3 class="descricao">
         Preparamos um ambiente onde você pode começar sua jornada no IFC de maneira tranquila! Aqui
         você conseguirá criar sua conta de e-mail, office e demais sistemas que você gostaria.
-      </p>
+      </h3>
 
-      <p class="descricao">Tudo isso, com a sua conta do gov.br!</p>
+      <h2 class="descricao">Tudo isso, com a sua conta do gov.br!</h2>
 
       <div class="botoes-section">
         <br-button emphasis="primary" @click="entrarComGovBr"> Entrar com gov.br</br-button>
@@ -45,11 +45,6 @@ const entrarComGovBr = (): void => {
   flex-direction: column;
   gap: 1.5rem;
   text-align: center;
-}
-
-.descricao {
-  font-size: 1.6em;
-  font-weight: 100;
 }
 
 .botoes-section {

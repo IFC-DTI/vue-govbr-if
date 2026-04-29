@@ -12,6 +12,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/cards',
+      name: 'cards',
+      component: () => import('@/views/ViewCards.vue'),
+      meta: {
+        breadcrumb: 'Cards',
+      },
+    },
+    {
       path: '/administracao',
       name: 'administracao',
       component: () => import('@/views/ViewAdministracao.vue'),
@@ -20,13 +28,13 @@ const router = createRouter({
       },
     },
     {
-      path: "/:pathMatch(.*)*",
-      name: "NotFound",
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
       component: () => import('@/views/ViewNotFound.vue'),
       meta: {
         breadcrumb: 'Página Não Encontrada',
       },
-    }
+    },
   ],
 })
 
