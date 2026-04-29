@@ -1,5 +1,5 @@
 <template>
-  <main class="card pagina-inicial my-5">
+  <main class="my-5">
     <br-card>
       <div class="logo-wrapper mt-5">
         <img :src="souIfcLogo" alt="SOU IFC" class="logo-principal" />
@@ -32,9 +32,6 @@ const entrarComGovBr = (): void => {
 </script>
 
 <style scoped>
-.card {
-  margin: 0 5em;
-}
 
 .logo-wrapper {
   display: flex;
