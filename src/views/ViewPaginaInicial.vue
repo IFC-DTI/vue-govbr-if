@@ -1,7 +1,7 @@
 <template>
-  <main class="pagina-inicial my-5">
-    <br-card class="rounded">
-      <div class="logo-wrapper">
+  <main class="card pagina-inicial my-5">
+    <br-card>
+      <div class="logo-wrapper mt-5">
         <img :src="souIfcLogo" alt="SOU IFC" class="logo-principal" />
       </div>
 
@@ -32,9 +32,8 @@ const entrarComGovBr = (): void => {
 </script>
 
 <style scoped>
-.pagina-inicial {
+.card {
   margin: 0 5em;
-  border-radius: 5em;
 }
 
 .logo-wrapper {
