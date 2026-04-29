@@ -4,7 +4,7 @@
     <AppHeader @startMenu="startMenu" />
     <!-- area do conteudo -->
     <main id="main">
-      <div class="container-lg d-flex">
+      <div class="container-lg">
         <div class="row">
           <MenuBar @closeMenu="closeMenu" v-if="menuAberto" />
           <div class="col pt-3 pb-5">

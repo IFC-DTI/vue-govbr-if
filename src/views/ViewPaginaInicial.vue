@@ -1,5 +1,5 @@
 <template>
-  <main class="my-5">
+  <main>
     <br-card>
       <div class="logo-wrapper mt-5">
         <img :src="souIfcLogo" alt="SOU IFC" class="logo-principal" />
@@ -32,7 +32,6 @@ const entrarComGovBr = (): void => {
 </script>
 
 <style scoped>
-
 .logo-wrapper {
   display: flex;
   align-items: center;
