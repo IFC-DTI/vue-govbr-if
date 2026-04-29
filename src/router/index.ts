@@ -21,6 +21,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/banner',
+      name: 'banner',
+      component: () => import('@/views/ViewBanner.vue'),
+      meta: {
+        breadcrumb: 'Banner',
+      },
+    },
+    {
       path: '/administracao',
       name: 'administracao',
       component: () => import('@/views/ViewAdministracao.vue'),

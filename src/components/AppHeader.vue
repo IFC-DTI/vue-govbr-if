@@ -7,7 +7,7 @@ import InputWithIcon from './InputWithIcon.vue'
     <br-header-logo slot="logo" src="/assets/images/Logo_IFC_horizontal.png"></br-header-logo>
 
     <br-header-list slot="links" list-title="Acesso Rápido">
-      <br-header-link href="https://ifc.edu.br">Página IFC</br-header-link>
+      <br-header-link href="/">Página Inicial</br-header-link>
       <br-header-link href="/cards">Cards</br-header-link>
       <br-header-link href="/banner">Banner</br-header-link>
       <br-header-link href="/exemplo">Exemplo</br-header-link>
