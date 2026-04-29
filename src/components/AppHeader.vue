@@ -8,6 +8,12 @@ import InputWithIcon from './InputWithIcon.vue'
 
     <br-header-list slot="links" list-title="Acesso Rápido">
       <br-header-link href="https://ifc.edu.br">Página IFC</br-header-link>
+      <br-header-link href="/cards">Cards</br-header-link>
+      <br-header-link href="/banner">Banner</br-header-link>
+      <br-header-link href="/exemplo">Exemplo</br-header-link>
+      <br-header-link href="/tabela">Tabela</br-header-link>
+      <br-header-link href="/tabela-dois">Tabela Dois</br-header-link>
+      <br-header-link href="/formulario">Formulário</br-header-link>
       <br-header-link href="/administracao">Administração</br-header-link>
     </br-header-list>
 

@@ -1,24 +1,21 @@
 <template>
   <main>
-    <br-card>
-      <div class="logo-wrapper mt-5">
-        <img :src="souIfcLogo" alt="SOU IFC" class="logo-principal" />
+    <div class="logo-wrapper mt-5">
+      <img :src="souIfcLogo" alt="SOU IFC" class="logo-principal" />
+    </div>
+
+    <div class="texto-principal mt-5 p-5">
+      <p class="descricao">
+        Preparamos um ambiente onde você pode começar sua jornada no IFC de maneira tranquila! Aqui
+        você conseguirá criar sua conta de e-mail, office e demais sistemas que você gostaria.
+      </p>
+
+      <p class="descricao">Tudo isso, com a sua conta do gov.br!</p>
+
+      <div class="botoes-section">
+        <br-button emphasis="primary" @click="entrarComGovBr"> Entrar com gov.br</br-button>
       </div>
-
-      <div class="texto-principal mt-5 p-5">
-        <p class="descricao">
-          Preparamos um ambiente onde você pode começar sua jornada no IFC de maneira tranquila!
-          Aqui você conseguirá criar sua conta de e-mail, office e demais sistemas que você
-          gostaria.
-        </p>
-
-        <p class="descricao">Tudo isso, com a sua conta do gov.br!</p>
-
-        <div class="botoes-section">
-          <br-button emphasis="primary" @click="entrarComGovBr"> Entrar com gov.br</br-button>
-        </div>
-      </div>
-    </br-card>
+    </div>
   </main>
 </template>
 
@@ -27,7 +24,6 @@ import souIfcLogo from '@/assets/sou-ifc-logo.png'
 
 const entrarComGovBr = (): void => {
   // TODO: Implementar redirecionamento para autenticação gov.br
-  console.log('Redirecionando para autenticação gov.br')
 }
 </script>
 
