@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { startLoading, stopLoading } from '@/stores/appLoading'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +37,18 @@ const router = createRouter({
       },
     },
   ],
+})
+
+router.beforeEach(() => {
+  startLoading()
+})
+
+router.afterEach(() => {
+  stopLoading()
+})
+
+router.onError(() => {
+  stopLoading()
 })
 
 export default router
