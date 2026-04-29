@@ -1,5 +1,5 @@
 <template>
-  <br-scrim>
+  <br-scrim auto-close>
     <br-modal
       id="basic-modal"
       title-text="Modal Básica"
@@ -33,7 +33,7 @@
       </div>
 
       <div slot="footer">
-        <br-button type="button" emphasis="secondary" id="basic-cancel-btn">Cancelar</br-button>
+        <br-button @click="$emit('fecharModal')" type="button" emphasis="secondary" id="basic-cancel-btn">Cancelar</br-button>
       </div>
     </br-modal>
   </br-scrim>

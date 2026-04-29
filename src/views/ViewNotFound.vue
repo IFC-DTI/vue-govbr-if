@@ -1,4 +1,5 @@
 <template>
+  <AppModal @fecharModal="isModalOpen = false" v-if="isModalOpen" />
   <div class="container-lg my-5">
     <div class="row align-items-center">
       <div class="col-sm-12 col-lg-4 text-center mb-4 mb-lg-0">
@@ -56,7 +57,7 @@
           Ir para Página Principal
         </br-button>
 
-        <br-button type="secondary" aria-label="Enviar Feedback" @click="enviarFeedback">
+        <br-button @click="abrirModalFeedback" type="secondary" aria-label="Enviar Feedback">
           <i class="fas fa-comment-dots mr-1" aria-hidden="true"></i>
           Envie um Feedback
         </br-button>
@@ -66,10 +67,13 @@
 </template>
 
 <script setup lang="ts">
+import AppModal from '@/components/AppModal.vue'
 import InputWithIcon from '@/components/InputWithIcon.vue'
+import { ref } from 'vue'
 import { useRouter, type Router } from 'vue-router'
 
 const router: Router = useRouter()
+const isModalOpen = ref(false)
 
 const voltar = (): void => {
   router.back()
@@ -79,9 +83,8 @@ const irParaHome = (): void => {
   router.push('/')
 }
 
-const enviarFeedback = (): void => {
-  // Implementar lógica de modal de feedback
-  console.log('Abrir modal de feedback')
+const abrirModalFeedback = (): void => {
+  isModalOpen.value = true
 }
 </script>
 
