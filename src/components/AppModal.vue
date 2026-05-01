@@ -1,40 +1,83 @@
 <template>
-  <br-scrim auto-close>
+  <br-scrim @click="$emit('fecharModal')">
     <br-modal
-      id="basic-modal"
-      title-text="Modal Básica"
+      id="feedback-modal"
+      title-text="Enviar Feedback"
       size="medium"
-      show
-      auto-close
-      initial-focus-selector="#basic-select"
+      :show="isShowingModal"
+      :auto-close="false"
+      initial-focus-selector="#feedback-textarea"
+      scrollable
+      @brModalBeforeClose="handleModalClose"
     >
-      <p>Modal básica sem fechamento automático. Requer JavaScript para fechar.</p>
+      <p>Sua opinião é importante para nós! Por favor, descreva o problema ou sugestão:</p>
+
+      <div class="form-group">
+        <br-textarea
+          id="feedback-textarea"
+          label="Mensagem:"
+          placeholder="Descreva o problema ou envie uma sugestão..."
+          rows="5"
+        ></br-textarea>
+      </div>
 
       <div class="form-group">
         <br-input
-          id="basic-input"
-          label="Campo de teste:"
-          type="text"
-          placeholder="Digite algo para testar"
+          id="email-input"
+          label="Email (opcional):"
+          type="email"
+          placeholder="seu.email@example.com"
         ></br-input>
       </div>
 
-      <div class="form-group">
-        <br-select
-          id="basic-select"
-          label="Seleção:"
-          placeholder="Escolha uma opção"
-          options='[
-          { "label": "Opção 1", "value": "opcao1", "selected": false },
-          { "label": "Opção 2", "value": "opcao2", "selected": false },
-          { "label": "Opção 3", "value": "opcao3", "selected": false }
-        ]'
-        ></br-select>
-      </div>
-
       <div slot="footer">
-        <br-button @click="$emit('fecharModal')" type="button" emphasis="secondary" id="basic-cancel-btn">Cancelar</br-button>
+        <ContainerBotoes>
+          <br-button
+            @click="enviarFeedback"
+            type="button"
+            emphasis="primary"
+            id="feedback-submit-btn"
+            >Enviar</br-button
+          >
+          <br-button
+            @click="$emit('fecharModal')"
+            type="button"
+            emphasis="secondary"
+            id="feedback-cancel-btn"
+            >Cancelar</br-button
+          >
+        </ContainerBotoes>
       </div>
     </br-modal>
   </br-scrim>
 </template>
+
+<script setup lang="ts">
+import ContainerBotoes from './ContainerBotoes.vue'
+
+interface Props {
+  isShowingModal: boolean
+}
+
+defineProps<Props>()
+
+const emit = defineEmits<{
+  fecharModal: []
+}>()
+
+const handleModalClose = (event: CustomEvent<{ close: () => void }> | Event) => {
+  // Sempre permitir que o modal feche quando solicitado (X, scrim ou botão)
+  if (event instanceof CustomEvent && event.detail?.close) {
+    event.detail.close()
+  }
+  // Emitir evento para o pai fechar
+  emit('fecharModal')
+}
+
+const enviarFeedback = (): void => {
+  // Aqui você pode adicionar lógica para enviar feedback
+  // Por enquanto, apenas fecha o modal
+  console.log('Feedback enviado')
+  emit('fecharModal')
+}
+</script>

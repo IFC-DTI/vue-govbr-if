@@ -1,5 +1,5 @@
 <template>
-  <AppModal @fecharModal="isModalOpen = false" v-if="isModalOpen" />
+  <AppModal :isShowingModal="isModalShowing" @fecharModal="fecharModalFeedback" />
   <div class="container-lg my-5">
     <div class="row align-items-center">
       <div class="col-sm-12 col-lg-4 text-center mb-4 mb-lg-0">
@@ -73,7 +73,7 @@ import { ref } from 'vue'
 import { useRouter, type Router } from 'vue-router'
 
 const router: Router = useRouter()
-const isModalOpen = ref(false)
+const isModalShowing = ref(false)
 
 const voltar = (): void => {
   router.back()
@@ -84,7 +84,11 @@ const irParaHome = (): void => {
 }
 
 const abrirModalFeedback = (): void => {
-  isModalOpen.value = true
+  isModalShowing.value = true
+}
+
+const fecharModalFeedback = (): void => {
+  isModalShowing.value = false
 }
 </script>
 
