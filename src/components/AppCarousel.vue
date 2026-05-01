@@ -1,223 +1,283 @@
 <template>
-  <div class="carousel-wrapper">
-    <div class="br-carousel" data-stage="in" data-mobile-nav="" aria-label="Carrossel de Exemplo" aria-roledescription="carousel">
-      <div class="carousel-button">
-        <button
-          class="br-button carousel-btn-prev terciary circle"
-          type="button"
-          aria-label="Anterior"
-          @click="prev"
-          :disabled="currentSlide === 0"
-        >
-          <i class="fas fa-chevron-left" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="carousel-stage">
-        <transition name="slide" mode="out-in">
-          <div
-            v-if="activeSlide"
-            :key="currentSlide"
-            class="carousel-page"
-            role="group"
-            aria-roledescription="slide"
-            :aria-label="`Slide ${currentSlide + 1} de ${slides.length}`"
-          >
-            <div
-              class="carousel-content"
-              :style="{ backgroundColor: activeSlide.hexColor }"
-            >
-              <div class="h3 carousel-title">{{ activeSlide.title }}</div>
-            </div>
+  <div class="carousel-container" role="region" aria-label="Banner rotativo">
+    <div class="carousel-stage">
+      <div
+        v-for="(banner, index) in banners"
+        :key="banner.id"
+        class="carousel-item"
+        :class="{ active: index === currentIndex }"
+      >
+        <div class="carousel-content">
+          <img :src="banner.image" :alt="banner.alt" loading="lazy" />
+
+          <div v-if="banner.description" class="carousel-caption">
+            <p class="text-weight-bold text-up-02 mb-1">{{ banner.label }}</p>
+            <p class="text-medium">{{ banner.description }}</p>
           </div>
-        </transition>
+        </div>
       </div>
-      <div class="carousel-button">
-        <button
-          class="br-button carousel-btn-next terciary circle"
-          type="button"
-          aria-label="Próximo"
-          @click="next"
-          :disabled="currentSlide === slides.length - 1"
+
+      <div class="carousel-controls">
+        <br-button
+          circle
+          small
+          aria-label="Banner anterior"
+          class="carousel-button-prev"
+          :disabled="currentIndex === 0 && !circular"
+          @click="previousBanner"
         >
-          <i class="fas fa-chevron-right" aria-hidden="true"></i>
-        </button>
+          <i class="fas fa-angle-left"></i>
+        </br-button>
+        <br-button
+          circle
+          small
+          aria-label="Próximo banner"
+          class="carousel-button-next"
+          :disabled="currentIndex === banners.length - 1 && !circular"
+          @click="nextBanner"
+        >
+          <i class="fas fa-angle-right"></i>
+        </br-button>
       </div>
-      <div class="carousel-step">
-        <nav class="br-step" data-initial="1" data-type="simple" role="none">
-          <div
-            class="step-progress"
-            role="listbox"
-            aria-orientation="horizontal"
-            aria-label="Lista de Opções"
-          >
-            <button
-              v-for="(slide, index) in slides"
-              :key="index"
-              class="step-progress-btn"
-              role="option"
-              :aria-posinset="index + 1"
-              :aria-setsize="slides.length"
-              :aria-pressed="currentSlide === index"
-              type="button"
-              @click="currentSlide = index"
-            >
-              <span class="step-info">{{ slide.label }}</span>
-            </button>
-          </div>
-        </nav>
-      </div>
+    </div>
+
+    <div class="carousel-indicators">
+      <button
+        v-for="(banner, index) in banners"
+        :key="banner.id"
+        class="indicator-dot"
+        :class="{ active: index === currentIndex }"
+        :aria-label="`Ir para banner ${index + 1} de ${banners.length}`"
+        :aria-current="index === currentIndex ? 'step' : 'false'"
+        @click="currentIndex = index"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
-interface Slide {
-  title: string
+interface BannerItem {
+  id: number
   label: string
-  bgColor: string
-  hexColor: string
+  image: string
+  alt: string
+  description?: string
 }
 
-const slides: Slide[] = [
-  { title: 'Página 1', label: 'Exemplo de Rótulo 1', bgColor: 'bg-blue-10', hexColor: '#e8f4fd' },
-  { title: 'Página 2', label: 'Exemplo de Rótulo 2', bgColor: 'bg-violet-warm-10', hexColor: '#f5e8fd' },
-  { title: 'Página 3', label: 'Exemplo de Rótulo 3', bgColor: 'bg-yellow-5', hexColor: '#fff3e0' },
-  { title: 'Página 4', label: 'Exemplo de Rótulo 4', bgColor: 'bg-green-cool-10', hexColor: '#e6f7f3' },
-  { title: 'Página 5', label: 'Exemplo de Rótulo 5', bgColor: 'bg-orange-vivid-10', hexColor: '#ffe6d0' },
-]
+interface Props {
+  banners: BannerItem[]
+  circular?: boolean
+}
 
-const currentSlide = ref(0)
-const activeSlide = computed(() => slides[currentSlide.value])
+const props = withDefaults(defineProps<Props>(), {
+  circular: false,
+})
 
-const next = () => {
-  if (currentSlide.value < slides.length - 1) {
-    currentSlide.value++
+const currentIndex = ref(0)
+
+const nextBanner = () => {
+  if (currentIndex.value < props.banners.length - 1) {
+    currentIndex.value++
+  } else if (props.circular) {
+    currentIndex.value = 0
   }
 }
 
-const prev = () => {
-  if (currentSlide.value > 0) {
-    currentSlide.value--
+const previousBanner = () => {
+  if (currentIndex.value > 0) {
+    currentIndex.value--
+  } else if (props.circular) {
+    currentIndex.value = props.banners.length - 1
   }
 }
 </script>
 
-<style>
-.carousel-wrapper {
+<style scoped>
+.carousel-container {
   width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-.br-carousel {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 
 .carousel-stage {
-  flex: 1;
-  min-height: 400px !important;
-  height: auto !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible !important;
-}
-
-.carousel-page {
-  width: 100%;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
-}
-
-.carousel-content {
   width: 100%;
-  min-height: 400px;
-  padding: 3rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  /* background-color: #e8f4fd;  Opcional: remova ou deixe sem !important */
-  color: #000;
+  height: 400px;
+  overflow: hidden;
+  border-radius: var(--border-radius-medium, 8px);
 }
 
-.carousel-title {
-  margin: 0;
+.carousel-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+  pointer-events: none;
+}
+
+.carousel-item.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Conteúdo do Item */
+.carousel-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.85) 30%,
+    rgba(0, 0, 0, 0.4) 70%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  color: white;
+  padding: 3rem 2rem 2rem;
   text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
 }
 
-.carousel-button {
-  flex-shrink: 0;
+.carousel-caption p {
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.8),
+    1px 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-.carousel-btn-prev,
-.carousel-btn-next {
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-scale-default, 1rem);
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
 }
 
-.carousel-btn-prev:disabled,
-.carousel-btn-next:disabled {
+.carousel-button-prev,
+.carousel-button-next {
+  pointer-events: auto;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+  transition: filter 150ms ease-in-out;
+}
+
+.carousel-button-prev i,
+.carousel-button-next i {
+  color: white;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+.carousel-button-prev:hover:not(:disabled),
+.carousel-button-next:hover:not(:disabled) {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+}
+
+.carousel-button-prev:disabled,
+.carousel-button-next:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.carousel-step {
-  width: 100%;
-  margin-top: 1.5rem;
-}
-
-.step-progress {
+.carousel-indicators {
   display: flex;
-  gap: 0.5rem;
   justify-content: center;
+  gap: 0.75rem;
+  padding: var(--spacing-scale-2x, 2rem) 0;
   flex-wrap: wrap;
 }
 
-.step-progress-btn {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--gray-40);
-  background: var(--white);
-  color: var(--text-dark);
-  border-radius: 4px;
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--color-interactive-primary, #003366);
+  background-color: transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.875rem;
+  transition: all 150ms ease-in-out;
+  padding: 0;
+  font-size: 0;
 }
 
-.step-progress-btn:hover {
-  border-color: var(--blue-warm-vivid-70);
-  background: var(--blue-10);
+.indicator-dot:hover {
+  transform: scale(1.1);
 }
 
-.step-progress-btn[aria-pressed="true"] {
-  background: var(--blue-warm-vivid-70);
-  color: var(--white);
-  border-color: var(--blue-warm-vivid-70);
+.indicator-dot.active {
+  background-color: var(--color-interactive-primary, #003366);
+  box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
 }
 
-/* Transição de slides */
-.slide-enter-active,
-.slide-leave-active {
-  transition: opacity 0.3s ease;
+@media (max-width: 768px) {
+  .carousel-stage {
+    height: 250px;
+  }
+
+  .carousel-caption {
+    padding: 2rem 1rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .carousel-controls {
+    padding: 0 0.5rem;
+  }
+
+  .carousel-indicators {
+    gap: 0.5rem;
+    padding: 1rem 0;
+  }
+
+  .indicator-dot {
+    width: 10px;
+    height: 10px;
+  }
 }
 
-.slide-enter-from {
-  opacity: 1;
+@media (max-width: 480px) {
+  .carousel-stage {
+    height: 200px;
+  }
+
+  .carousel-caption {
+    padding: 1.5rem 0.5rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .carousel-indicators {
+    gap: 0.25rem;
+    padding: 0.75rem 0;
+  }
+
+  .indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-width: 1.5px;
+  }
 }
 
-.slide-leave-to {
-  opacity: 1;
+.carousel-indicators {
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+}
+
+p {
+  color: white;
 }
 </style>
