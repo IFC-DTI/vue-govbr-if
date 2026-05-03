@@ -29,6 +29,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/tabela-simples',
+      name: 'tabela-simples',
+      component: () => import('@/views/ViewTabelaSimples.vue'),
+      meta: {
+        breadcrumb: 'Tabela Simples',
+      },
+    },
+    {
       path: '/administracao',
       name: 'administracao',
       component: () => import('@/views/ViewAdministracao.vue'),
