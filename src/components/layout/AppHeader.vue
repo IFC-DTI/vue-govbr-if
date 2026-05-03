@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import InputWithIcon from './InputWithIcon.vue'
+import InputWithIcon from '@/components/InputWithIcon.vue'
 </script>
 
 <template>
@@ -11,8 +11,8 @@ import InputWithIcon from './InputWithIcon.vue'
       <br-header-link href="/cards">Cards</br-header-link>
       <br-header-link href="/banner">Banner</br-header-link>
       <br-header-link href="/exemplo">Exemplo</br-header-link>
-      <br-header-link href="/tabela">Tabela</br-header-link>
-      <br-header-link href="/tabela-dois">Tabela Dois</br-header-link>
+      <br-header-link href="/tabela-simples">Tabela</br-header-link>
+      <br-header-link href="/tabela-complexa">Tabela Dois</br-header-link>
       <br-header-link href="/formulario">Formulário</br-header-link>
       <br-header-link href="/administracao">Administração</br-header-link>
     </br-header-list>

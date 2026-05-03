@@ -22,9 +22,9 @@
 
 <script setup lang="ts">
 import AppBreadcrumb from '@/components/AppBreadcrumb.vue'
-import AppFooter from '@/components/AppFooter.vue'
-import AppHeader from '@/components/AppHeader.vue'
-import MenuBar from '@/components/MenuBar.vue'
+import AppFooter from '@/components/layout/AppFooter.vue'
+import AppHeader from '@/components/layout/AppHeader.vue'
+import MenuBar from '@/components/layout/MenuBar.vue'
 import { ref } from 'vue'
 
 const menuAberto = ref(false)
