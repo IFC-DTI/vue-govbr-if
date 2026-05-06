@@ -2,7 +2,7 @@
   <main>
     <div>
       <h1 class="text-center">Tabelas Simples</h1>
-      <AppTabelaSimples :title="'Usuários'" :headers="colunas" :data="usuarios" />
+      <AppTabelaSimples :headers="colunas" :data="usuarios" />
     </div>
   </main>
 </template>

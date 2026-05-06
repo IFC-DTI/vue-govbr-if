@@ -49,7 +49,6 @@ interface TableHeader {
 }
 
 interface Props {
-  title: string
   headers: TableHeader[]
   data: T[]
 }
