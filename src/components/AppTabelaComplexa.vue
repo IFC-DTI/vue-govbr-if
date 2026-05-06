@@ -123,8 +123,9 @@
                 :name="`check-all-${tableId}`"
                 type="checkbox"
                 aria-label="Selecionar tudo"
-                :checked="isAllSelected"
+                :indeterminate="selectedRows.size > 0"
                 @change="toggleSelectAll"
+                ref="checkAllInput"
               />
               <label :for="`check-all-${tableId}`">Selecionar todas as linhas</label>
             </div>
@@ -136,19 +137,20 @@
       </thead>
       <tbody>
         <template v-for="(item, index) in paginatedData" :key="`row-${index}`">
+          <!-- LINHA PRINCIPAL -->
           <tr :class="{ 'is-selected': selectedRows.has(item.id) }">
             <td>
-              <button
-                class="br-button circle small"
-                type="button"
-                :id="`button-line-${index}-${tableId}`"
+              <br-button
+                shape="circle"
                 :aria-label="`Expandir/Retrair ${item[expandableKey] || 'Detalhes'}`"
-                data-toggle="collapse"
-                :data-target="`collapse-${index}-${tableId}`"
-                :aria-describedby="`collapse-${index}-${tableId}`"
+                @click="toggleRowExpand(index)"
               >
-                <i class="fas fa-chevron-down"></i>
-              </button>
+                <br-icon
+                  :icon-name="
+                    expandedRows.has(index) ? 'fa-solid:chevron-up' : 'fa-solid:chevron-down'
+                  "
+                ></br-icon>
+              </br-button>
             </td>
             <td>
               <div class="br-checkbox hidden-label">
@@ -160,23 +162,23 @@
                   :checked="selectedRows.has(item.id)"
                   @change="toggleSelectRow(item.id)"
                 />
-                <label :for="`check-line-${index}-${tableId}`"
-                  >Selecionar linha {{ index + 1 }}</label
-                >
+                <label :for="`check-line-${index}-${tableId}`">
+                  Selecionar linha {{ index + 1 }}
+                </label>
               </div>
             </td>
             <td v-for="header in headers" :key="`${index}-${header.key}`" :data-th="header.label">
               {{ item[header.key] }}
             </td>
           </tr>
-          <tr v-if="expandableKey && item[expandableKey]" class="collapse">
-            <td
-              :id="`collapse-${index}-${tableId}`"
-              aria-hidden="true"
-              hidden="hidden"
-              :colspan="headers.length + 2"
-            >
-              {{ item[expandableKey] }}
+
+          <!-- LINHA DE DETALHES (COLLAPSE) -->
+          <tr v-if="expandedRows.has(index) && item[expandableKey]" class="collapse-content">
+            <!-- O colspan deve somar: botão expandir (1) + checkbox (1) + total de headers -->
+            <td :colspan="headers.length + 2">
+              <div class="collapse-body">
+                {{ item[expandableKey] }}
+              </div>
             </td>
           </tr>
         </template>
@@ -196,7 +198,7 @@
 </template>
 
 <script setup lang="ts" generic="T extends Record<string, any>">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
 
 interface TableHeader {
   label: string
@@ -226,11 +228,13 @@ const emit = defineEmits<{
 
 // State
 const tableContainer = ref<HTMLDivElement | null>(null)
+const checkAllInput = ref<HTMLInputElement | null>(null)
 const tableId = ref(`table-${Math.random().toString(36).substr(2, 9)}`)
 const density = ref<'small' | 'medium' | 'large'>('medium')
 const showSearch = ref(false)
 const searchQuery = ref('')
 const selectedRows = ref<Set<string | number>>(new Set())
+const expandedRows = ref<Set<string | number>>(new Set())
 const currentPage = ref(1)
 const itemsPerPage = ref(20)
 
@@ -261,6 +265,12 @@ const isAllSelected = computed(() => {
   return paginatedData.value.every((row) => selectedRows.value.has(row.id))
 })
 
+const isPartiallySelected = computed(() => {
+  if (paginatedData.value.length === 0) return false
+  const someSelected = paginatedData.value.some((row) => selectedRows.value.has(row.id))
+  return someSelected && !isAllSelected.value
+})
+
 // Methods
 const setDensity = (newDensity: 'small' | 'medium' | 'large') => {
   density.value = newDensity
@@ -289,11 +299,16 @@ const toggleSelectRow = (rowId: string | number) => {
   } else {
     selectedRows.value.add(rowId)
   }
+  atualizarIndeterminate()
   emit('selectionChange', selectedRows.value)
 }
 
 const toggleSelectAll = () => {
-  if (isAllSelected.value) {
+  if (isPartiallySelected.value) {
+    paginatedData.value.forEach((row) => {
+      selectedRows.value.delete(row.id)
+    })
+  } else if (isAllSelected.value) {
     paginatedData.value.forEach((row) => {
       selectedRows.value.delete(row.id)
     })
@@ -302,11 +317,27 @@ const toggleSelectAll = () => {
       selectedRows.value.add(row.id)
     })
   }
+  atualizarIndeterminate()
   emit('selectionChange', selectedRows.value)
+}
+
+const atualizarIndeterminate = async () => {
+  await nextTick()
+  if (checkAllInput.value) {
+    checkAllInput.value.checked = false
+  }
 }
 
 const guardaValorInputPesquisa = (e: { target: { value: string } }) => {
   searchQuery.value = e.target.value
+}
+
+const toggleRowExpand = (rowId: string | number) => {
+  if (expandedRows.value.has(rowId)) {
+    expandedRows.value.delete(rowId)
+  } else {
+    expandedRows.value.add(rowId)
+  }
 }
 
 const onPageChange = (event: CustomEvent<PageChangeDetail>) => {
@@ -319,12 +350,10 @@ const onPerPageChange = (event: CustomEvent<{ perPage: number }>) => {
   currentPage.value = 1
 }
 
-// Watch para resetar página ao filtrar
 watch(searchQuery, () => {
   currentPage.value = 1
 })
 
-// Watch para garantir que a página atual é válida
 watch(filteredData, () => {
   const maxPage = Math.ceil(filteredData.value.length / itemsPerPage.value) || 1
   if (currentPage.value > maxPage) {
@@ -334,7 +363,8 @@ watch(filteredData, () => {
 
 // Lifecycles
 onMounted(() => {
-  // Listener nativo para pageChange da paginação
+  atualizarIndeterminate()
+
   if (tableContainer.value) {
     const pagination = tableContainer.value.querySelector('br-pagination')
     if (pagination) {
@@ -357,5 +387,21 @@ table {
 
 br-item {
   cursor: pointer;
+}
+
+tr.collapse-content {
+  background-color: #f5f5f5;
+}
+
+tr.collapse-content td {
+  padding: 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.collapse-body {
+  padding: 1rem;
+  display: block;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 </style>
