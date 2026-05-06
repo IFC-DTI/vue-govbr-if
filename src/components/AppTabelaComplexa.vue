@@ -68,7 +68,12 @@
 
       <!-- SEARCH BAR -->
       <div v-if="showSearch">
-        <br-input placeholder="Faça sua pesquisa." is-highlight action-label="Pesquisar">
+        <br-input
+          placeholder="Faça sua pesquisa."
+          is-highlight
+          action-label="Pesquisar"
+          @input="guardaValorInputPesquisa"
+        >
           <br-icon slot="icon" icon-name="fa-solid:search" aria-hidden="true"></br-icon>
           <br-button slot="action" shape="circle" aria-label="Fechar busca" @click="closeSearch">
             <i class="fas fa-times" aria-hidden="true"></i>
@@ -358,6 +363,7 @@ const currentPage = ref(1)
 const itemsPerPage = ref(20)
 
 // Computed
+
 const filteredData = computed(() => {
   if (!searchQuery.value.trim()) {
     return props.data
@@ -396,29 +402,28 @@ const isAllSelected = computed(() => {
 })
 
 // Methods
-function setDensity(newDensity: 'small' | 'medium' | 'large') {
+const setDensity = (newDensity: 'small' | 'medium' | 'large') => {
   density.value = newDensity
   closeDensityMenu()
 }
 
-function closeDensityMenu() {
+const closeDensityMenu = () => {
   const menu = tableContainer.value?.querySelector(`#density-menu-${tableId.value}`)
   if (menu) {
     menu.setAttribute('hidden', '')
   }
 }
 
-function toggleSearch() {
+const toggleSearch = () => {
   showSearch.value = !showSearch.value
-  console.log(showSearch.value)
 }
 
-function closeSearch() {
+const closeSearch = () => {
   showSearch.value = false
   searchQuery.value = ''
 }
 
-function toggleSelectRow(rowId: string | number) {
+const toggleSelectRow = (rowId: string | number) => {
   if (selectedRows.value.has(rowId)) {
     selectedRows.value.delete(rowId)
   } else {
@@ -427,7 +432,7 @@ function toggleSelectRow(rowId: string | number) {
   emit('selectionChange', selectedRows.value)
 }
 
-function toggleSelectAll() {
+const toggleSelectAll = () => {
   if (isAllSelected.value) {
     paginatedData.value.forEach((row) => {
       selectedRows.value.delete(row.id)
@@ -440,16 +445,20 @@ function toggleSelectAll() {
   emit('selectionChange', selectedRows.value)
 }
 
-function nextPage() {
+const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value++
   }
 }
 
-function previousPage() {
+const previousPage = () => {
   if (currentPage.value > 1) {
     currentPage.value--
   }
+}
+
+const guardaValorInputPesquisa = (e: { target: { value: string } }) => {
+  searchQuery.value = e.target.value
 }
 
 // Watch para resetar página ao filtrar
