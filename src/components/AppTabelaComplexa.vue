@@ -1,12 +1,5 @@
 <template>
-  <div
-    ref="tableContainer"
-    class="br-table"
-    :class="density"
-    data-search="data-search"
-    data-selection="data-selection"
-    data-collapse="data-collapse"
-  >
+  <div :class="`br-table ${density}`">
     <!-- HEADER -->
     <div class="table-header">
       <div class="top-bar">
@@ -115,8 +108,8 @@
       </caption>
       <thead>
         <tr>
-          <td class="column-collapse" scope="col" aria-hidden="true"></td>
-          <th class="column-checkbox" scope="col">
+          <td class="column-collapse" aria-hidden="true"></td>
+          <th class="column-checkbox">
             <div class="br-checkbox hidden-label">
               <input
                 :id="`check-all-${tableId}`"
@@ -198,7 +191,7 @@
 </template>
 
 <script setup lang="ts" generic="T extends Record<string, any>">
-import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 
 interface TableHeader {
   label: string
@@ -322,10 +315,7 @@ const toggleSelectAll = () => {
 }
 
 const atualizarIndeterminate = async () => {
-  await nextTick()
-  if (checkAllInput.value) {
-    checkAllInput.value.checked = false
-  }
+  checkAllInput.value!.checked = false
 }
 
 const guardaValorInputPesquisa = (e: { target: { value: string } }) => {
