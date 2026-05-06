@@ -37,6 +37,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/tabela-complexa',
+      name: 'tabela-complexa',
+      component: () => import('@/views/ViewTabelaComplexa.vue'),
+      meta: {
+        breadcrumb: 'Tabela Complexa',
+      },
+    },
+    {
       path: '/administracao',
       name: 'administracao',
       component: () => import('@/views/ViewAdministracao.vue'),
