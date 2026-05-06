@@ -89,36 +89,20 @@
             selectedRows.size > 1 ? 'itens selecionados' : 'item selecionado'
           }}</span>
         </div>
-        <div class="actions-trigger text-nowrap">
-          <br-button shape="circle" aria-label="Ver mais opções de ação" aria-haspopup="true">
-            <i class="fas fa-ellipsis-v"></i>
+
+        <br-dropdown placement="bottom-end">
+          <br-button slot="trigger" shape="circle" aria-label="Ver mais opções de ação">
+            <i class="fas fa-ellipsis-v" style="color: #fff"></i>
           </br-button>
-          <div
-            :id="`selection-menu-${tableId}`"
-            class="br-list"
-            role="menu"
-            :aria-labelledby="`button-dropdown-selection-${tableId}`"
-            hidden="hidden"
-          >
-            <button
-              class="br-item"
-              type="button"
-              role="menuitem"
-              @click="emit('action', { action: 'delete', items: Array.from(selectedRows) })"
-            >
-              Deletar selecionados
-            </button>
-            <span class="br-divider"></span>
-            <button
-              class="br-item"
-              type="button"
-              role="menuitem"
-              @click="emit('action', { action: 'export', items: Array.from(selectedRows) })"
-            >
-              Exportar
-            </button>
-          </div>
-        </div>
+          <br-list slot="target" list-title="Ações">
+            <br-item @click="emit('action', { action: 'delete', items: Array.from(selectedRows) })">
+              <span> Deletar selecionados </span>
+            </br-item>
+            <br-item @click="emit('action', { action: 'export', items: Array.from(selectedRows) })">
+              <span>Exportar</span>
+            </br-item>
+          </br-list>
+        </br-dropdown>
       </div>
     </div>
 
@@ -369,5 +353,9 @@ onMounted(() => {
 <style scoped>
 table {
   width: 100%;
+}
+
+br-item {
+  cursor: pointer;
 }
 </style>
