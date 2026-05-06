@@ -20,7 +20,7 @@
               aria-label="Definir
             densidade da tabela"
             >
-              <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+              <i class="fas fa-ellipsis-v"></i>
             </br-button>
             <br-list slot="target" list-title="Menu">
               <br-item>
@@ -61,7 +61,7 @@
         </div>
         <div class="search-trigger">
           <br-button class="br-button circle" aria-label="Abrir busca" @click="toggleSearch">
-            <br-icon icon-name="fa-solid:search" aria-hidden="true"></br-icon>
+            <br-icon icon-name="fa-solid:search" inert></br-icon>
           </br-button>
         </div>
       </div>
@@ -74,9 +74,9 @@
           action-label="Pesquisar"
           @input="guardaValorInputPesquisa"
         >
-          <br-icon slot="icon" icon-name="fa-solid:search" aria-hidden="true"></br-icon>
+          <br-icon slot="icon" icon-name="fa-solid:search" inert></br-icon>
           <br-button slot="action" shape="circle" aria-label="Fechar busca" @click="closeSearch">
-            <i class="fas fa-times" aria-hidden="true"></i>
+            <i class="fas fa-times"></i>
           </br-button>
         </br-input>
       </div>
@@ -90,18 +90,9 @@
           }}</span>
         </div>
         <div class="actions-trigger text-nowrap">
-          <button
-            class="br-button circle inverted"
-            type="button"
-            :id="`button-dropdown-selection-${tableId}`"
-            data-toggle="dropdown"
-            :data-target="`selection-menu-${tableId}`"
-            :aria-controls="`selection-menu-${tableId}`"
-            aria-label="Ver mais opções de ação"
-            aria-haspopup="true"
-          >
-            <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-          </button>
+          <br-button shape="circle" aria-label="Ver mais opções de ação" aria-haspopup="true">
+            <i class="fas fa-ellipsis-v"></i>
+          </br-button>
           <div
             :id="`selection-menu-${tableId}`"
             class="br-list"
@@ -172,7 +163,7 @@
                 :data-target="`collapse-${index}-${tableId}`"
                 :aria-describedby="`collapse-${index}-${tableId}`"
               >
-                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                <i class="fas fa-chevron-down"></i>
               </button>
             </td>
             <td>
@@ -209,122 +200,14 @@
     </table>
 
     <!-- FOOTER / PAGINATION -->
-    <div class="table-footer">
-      <nav class="br-pagination" aria-label="paginação">
-        <div class="pagination-per-page">
-          <div class="br-select">
-            <div class="br-input">
-              <label :for="`per-page-selection-${tableId}`">Exibir</label>
-              <input
-                :id="`per-page-selection-${tableId}`"
-                type="text"
-                :value="itemsPerPage"
-                placeholder=" "
-                readonly
-              />
-              <button
-                class="br-button"
-                type="button"
-                aria-label="Exibir lista"
-                tabindex="-1"
-                data-trigger="data-trigger"
-              >
-                <i class="fas fa-angle-down" aria-hidden="true"></i>
-              </button>
-            </div>
-            <div class="br-list" tabindex="0">
-              <div
-                v-for="perPage in [10, 20, 30]"
-                :key="`per-page-${perPage}`"
-                class="br-item"
-                tabindex="-1"
-              >
-                <div class="br-radio">
-                  <input
-                    :id="`per-page-${perPage}-${tableId}`"
-                    type="radio"
-                    :name="`per-page-${tableId}`"
-                    :value="perPage"
-                    :checked="itemsPerPage === perPage"
-                    @change="((itemsPerPage = perPage), (currentPage = 1))"
-                  />
-                  <label :for="`per-page-${perPage}-${tableId}`">{{ perPage }}</label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <span class="br-divider d-none d-sm-block mx-3"></span>
-        <div class="pagination-information d-none d-sm-flex">
-          <span class="current">{{ startItem }}</span
-          >&ndash;<span class="per-page">{{ endItem }}</span
-          >&nbsp;de&nbsp;<span class="total">{{ filteredData.length }}</span
-          >&nbsp;itens
-        </div>
-
-        <div class="pagination-go-to-page d-none d-sm-flex ml-auto">
-          <div class="br-select">
-            <div class="br-input">
-              <label :for="`go-to-selection-${tableId}`">Página</label>
-              <input
-                :id="`go-to-selection-${tableId}`"
-                type="text"
-                :value="currentPage"
-                placeholder=" "
-                readonly
-              />
-              <button
-                class="br-button"
-                type="button"
-                aria-label="Exibir lista"
-                tabindex="-1"
-                data-trigger="data-trigger"
-              >
-                <i class="fas fa-angle-down" aria-hidden="true"></i>
-              </button>
-            </div>
-            <div class="br-list" tabindex="0">
-              <div v-for="page in totalPages" :key="`page-${page}`" class="br-item" tabindex="-1">
-                <div class="br-radio">
-                  <input
-                    :id="`go-to-${page}-${tableId}`"
-                    type="radio"
-                    :name="`go-to-${tableId}`"
-                    :value="page"
-                    :checked="currentPage === page"
-                    @change="currentPage = page"
-                  />
-                  <label :for="`go-to-${page}-${tableId}`">{{ page }}</label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <span class="br-divider d-none d-sm-block mx-3"></span>
-        <div class="pagination-arrows ml-auto ml-sm-0">
-          <button
-            class="br-button circle"
-            type="button"
-            aria-label="Voltar página"
-            :disabled="currentPage === 1"
-            @click="previousPage"
-          >
-            <i class="fas fa-angle-left" aria-hidden="true"></i>
-          </button>
-          <button
-            class="br-button circle"
-            type="button"
-            aria-label="Página seguinte"
-            :disabled="currentPage === totalPages"
-            @click="nextPage"
-          >
-            <i class="fas fa-angle-right" aria-hidden="true"></i>
-          </button>
-        </div>
-      </nav>
-    </div>
+    <br-pagination
+      variant="contextual"
+      :total-items="filteredData.length"
+      :current="currentPage"
+      :per-page="itemsPerPage"
+      @pageChange="onPageChange"
+      @perPageChange="onPerPageChange"
+    ></br-pagination>
   </div>
 </template>
 
@@ -341,6 +224,11 @@ interface Props {
   headers: TableHeader[]
   data: T[]
   expandableKey?: string
+}
+
+interface PageChangeDetail {
+  current?: number
+  page?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -376,18 +264,6 @@ const filteredData = computed(() => {
       return cellValue.includes(query)
     })
   })
-})
-
-const totalPages = computed(() => {
-  return Math.ceil(filteredData.value.length / itemsPerPage.value)
-})
-
-const startItem = computed(() => {
-  return (currentPage.value - 1) * itemsPerPage.value + 1
-})
-
-const endItem = computed(() => {
-  return Math.min(currentPage.value * itemsPerPage.value, filteredData.value.length)
 })
 
 const paginatedData = computed(() => {
@@ -445,20 +321,18 @@ const toggleSelectAll = () => {
   emit('selectionChange', selectedRows.value)
 }
 
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) {
-    currentPage.value++
-  }
-}
-
-const previousPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--
-  }
-}
-
 const guardaValorInputPesquisa = (e: { target: { value: string } }) => {
   searchQuery.value = e.target.value
+}
+
+const onPageChange = (event: CustomEvent<PageChangeDetail>) => {
+  const newPage = event.detail?.current || event.detail?.page || currentPage.value
+  currentPage.value = newPage
+}
+
+const onPerPageChange = (event: CustomEvent<{ perPage: number }>) => {
+  itemsPerPage.value = event.detail?.perPage ?? itemsPerPage.value
+  currentPage.value = 1
 }
 
 // Watch para resetar página ao filtrar
@@ -466,10 +340,29 @@ watch(searchQuery, () => {
   currentPage.value = 1
 })
 
+// Watch para garantir que a página atual é válida
+watch(filteredData, () => {
+  const maxPage = Math.ceil(filteredData.value.length / itemsPerPage.value) || 1
+  if (currentPage.value > maxPage) {
+    currentPage.value = maxPage
+  }
+})
+
 // Lifecycles
 onMounted(() => {
-  // Inicializar comportamentos do GovBR (se necessário)
-  // O Vue + eventos nativos já cuidam da maior parte da funcionalidade
+  // Listener nativo para pageChange da paginação
+  if (tableContainer.value) {
+    const pagination = tableContainer.value.querySelector('br-pagination')
+    if (pagination) {
+      pagination.addEventListener('pageChange', (event: Event) => {
+        const customEvent = event as CustomEvent<PageChangeDetail>
+        const newPage = customEvent.detail?.current || customEvent.detail?.page || 1
+        if (newPage && newPage !== currentPage.value) {
+          currentPage.value = newPage
+        }
+      })
+    }
+  }
 })
 </script>
 
