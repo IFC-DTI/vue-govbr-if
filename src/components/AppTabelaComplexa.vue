@@ -12,98 +12,68 @@
       <div class="top-bar">
         <div class="table-title">{{ title }}</div>
         <div class="actions-trigger text-nowrap">
-          <button
-            class="br-button circle"
-            type="button"
-            :id="`button-dropdown-density-${tableId}`"
-            title="Ver mais opções"
-            data-toggle="dropdown"
-            :data-target="`density-menu-${tableId}`"
-            aria-label="Definir densidade da tabela"
-            aria-haspopup="true"
-            aria-live="polite"
-          >
-            <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-          </button>
-          <div
-            :id="`density-menu-${tableId}`"
-            class="br-list"
-            role="menu"
-            :aria-labelledby="`button-dropdown-density-${tableId}`"
-            hidden="hidden"
-          >
-            <button
-              class="br-item"
-              type="button"
-              data-density="small"
-              role="menuitem"
-              @click="setDensity('small')"
+          <br-dropdown placement="bottom-end">
+            <br-button
+              shape="circle"
+              slot="trigger"
+              title="Ver mais opções"
+              aria-label="Definir
+            densidade da tabela"
             >
-              Densidade alta
-            </button>
-            <span class="br-divider"></span>
-            <button
-              class="br-item"
-              type="button"
-              data-density="medium"
-              role="menuitem"
-              @click="setDensity('medium')"
-            >
-              Densidade média
-            </button>
-            <span class="br-divider"></span>
-            <button
-              class="br-item"
-              type="button"
-              data-density="large"
-              role="menuitem"
-              @click="setDensity('large')"
-            >
-              Densidade baixa
-            </button>
-          </div>
+              <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+            </br-button>
+            <br-list slot="target" list-title="Menu">
+              <br-item>
+                <button
+                  class="br-item"
+                  type="button"
+                  data-density="small"
+                  role="menuitem"
+                  @click="setDensity('small')"
+                >
+                  Densidade alta
+                </button>
+              </br-item>
+              <br-item>
+                <button
+                  class="br-item"
+                  type="button"
+                  data-density="medium"
+                  role="menuitem"
+                  @click="setDensity('medium')"
+                >
+                  Densidade média
+                </button>
+              </br-item>
+              <br-item>
+                <button
+                  class="br-item"
+                  type="button"
+                  data-density="large"
+                  role="menuitem"
+                  @click="setDensity('large')"
+                >
+                  Densidade baixa
+                </button>
+              </br-item>
+            </br-list>
+          </br-dropdown>
         </div>
         <div class="search-trigger">
-          <button
-            class="br-button circle"
-            type="button"
-            :id="`button-input-search-${tableId}`"
-            data-toggle="search"
-            aria-label="Abrir busca"
-            :aria-controls="`search-box-${tableId}`"
-            @click="toggleSearch"
-          >
-            <i class="fas fa-search" aria-hidden="true"></i>
-          </button>
+          <br-button class="br-button circle" aria-label="Abrir busca" @click="toggleSearch">
+            <br-icon icon-name="fa-solid:search" aria-hidden="true"></br-icon>
+          </br-button>
         </div>
       </div>
 
       <!-- SEARCH BAR -->
-      <div v-if="showSearch" class="search-bar">
-        <div class="br-input">
-          <label :for="`search-box-${tableId}`">Buscar na tabela</label>
-          <input
-            :id="`search-box-${tableId}`"
-            v-model="searchQuery"
-            type="search"
-            placeholder="Buscar na tabela"
-            :aria-labelledby="`button-input-search-${tableId}`"
-            aria-label="Buscar na tabela"
-            @keydown.escape="closeSearch"
-          />
-          <button class="br-button" type="button" aria-label="Buscar">
-            <i class="fas fa-search" aria-hidden="true"></i>
-          </button>
-        </div>
-        <button
-          class="br-button circle"
-          type="button"
-          data-dismiss="search"
-          aria-label="Fechar busca"
-          @click="closeSearch"
-        >
-          <i class="fas fa-times" aria-hidden="true"></i>
-        </button>
+      <div v-if="showSearch">
+        <br-input placeholder="Faça sua pesquisa." is-highlight action-label="Pesquisar">
+          <br-icon slot="icon" icon-name="fa-solid:search" aria-hidden="true"></br-icon>
+          <br-button slot="action" shape="circle" aria-label="Fechar busca" @click="closeSearch">
+            <i class="fas fa-times" aria-hidden="true"></i>
+          </br-button>
+        </br-input>
       </div>
 
       <!-- SELECTED BAR -->
@@ -440,14 +410,7 @@ function closeDensityMenu() {
 
 function toggleSearch() {
   showSearch.value = !showSearch.value
-  if (showSearch.value) {
-    setTimeout(() => {
-      const input = tableContainer.value?.querySelector(
-        `#search-box-${tableId.value}`,
-      ) as HTMLInputElement
-      input?.focus()
-    }, 0)
-  }
+  console.log(showSearch.value)
 }
 
 function closeSearch() {
