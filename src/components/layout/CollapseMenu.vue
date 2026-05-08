@@ -38,15 +38,17 @@
           </div>
 
           <div class="br-list no-border-list">
-            <template v-for="(item) in sub.itens" :key="item.id">
-              <a class="br-item border-0 ml-4" role="button">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <i :class="['fas', item.icon]" aria-hidden="true"></i>
+            <template v-for="item in sub.itens" :key="item.id">
+              <router-link :to="item.link">
+                <a class="br-item border-0 ml-4" role="button">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <i :class="['fas', item.icon]" aria-hidden="true"></i>
+                    </div>
+                    <div class="col">{{ item.label }}</div>
                   </div>
-                  <div class="col">{{ item.label }}</div>
-                </div>
-              </a>
+                </a>
+              </router-link>
             </template>
           </div>
         </br-collapse>

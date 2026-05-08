@@ -12,20 +12,26 @@ import CollapseMenu from './CollapseMenu.vue'
       </div>
 
       <CollapseMenu
-        group-title="Agrupamento do Menu 1"
+        group-title="Agrupamento 1"
         group-icon="fas fa-bell"
         :sub-collapses="[
           {
             id: 1,
-            label: 'Submenu 1',
+            label: 'Páginas',
             icon: 'fas fa-file',
-            itens: [{ id: 1, label: 'Usuários', link: '#', icon: 'fas fa-file' }],
+            itens: [
+              { id: 1, label: 'Cards', link: '/cards', icon: 'fas fa-arrow-right' },
+              { id: 2, label: 'Banner', link: '/banner', icon: 'fas fa-arrow-right' },
+              { id: 3, label: 'Exemplo', link: '/exemplo', icon: 'fas fa-arrow-right' },
+              { id: 4, label: 'Tabela Simples', link: '/tabela-simples', icon: 'fas fa-arrow-right' },
+              { id: 5, label: 'Tabela Complexa', link: '/tabela-complexa', icon: 'fas fa-arrow-right' },
+            ],
           },
           {
             id: 2,
-            label: 'Submenu 2',
-            icon: 'fas fa-file',
-            itens: [{ id: 2, label: 'Admins', link: '#', icon: 'fas fa-user' }],
+            label: 'Administrativo',
+            icon: 'fas fa-cog',
+            itens: [{ id: 1, label: 'Administração', link: '/administracao', icon: 'fas fa-user' }],
           },
         ]"
       />
