@@ -29,6 +29,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/exemplo',
+      name: 'exemplo',
+      component: () => import('@/views/ViewExemplo.vue'),
+      meta: {
+        breadcrumb: 'Exemplo',
+      },
+    },
+    {
       path: '/tabela-simples',
       name: 'tabela-simples',
       component: () => import('@/views/ViewTabelaSimples.vue'),
