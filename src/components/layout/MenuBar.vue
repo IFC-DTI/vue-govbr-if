@@ -25,6 +25,7 @@ import CollapseMenu from './CollapseMenu.vue'
               { id: 3, label: 'Exemplo', link: '/exemplo', icon: 'fas fa-arrow-right' },
               { id: 4, label: 'Tabela Simples', link: '/tabela-simples', icon: 'fas fa-arrow-right' },
               { id: 5, label: 'Tabela Complexa', link: '/tabela-complexa', icon: 'fas fa-arrow-right' },
+              { id: 6, label: 'Formulário', link: '/formulario', icon: 'fas fa-arrow-right' },
             ],
           },
           {

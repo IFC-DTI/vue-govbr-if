@@ -53,6 +53,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/formulario',
+      name: 'formulario',
+      component: () => import('@/views/ViewFormulario.vue'),
+      meta: {
+        breadcrumb: 'Formulário',
+      },
+    },
+    {
       path: '/administracao',
       name: 'administracao',
       component: () => import('@/views/ViewAdministracao.vue'),
