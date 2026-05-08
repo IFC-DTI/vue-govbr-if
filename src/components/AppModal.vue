@@ -1,5 +1,5 @@
 <template>
-  <br-scrim @click="$emit('fecharModal')">
+  <br-scrim @click.self="$emit('fecharModal')">
     <br-modal
       id="feedback-modal"
       title-text="Enviar Feedback"
