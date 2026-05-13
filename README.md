@@ -1,104 +1,123 @@
 # vue-govbr-if
 
-Guia rapido para estagiario subir o projeto com Docker.
+![Capa do projeto](public/assets/images/Logo_IFC_horizontal_sem_fundo.png)
 
-## Objetivo
+Projeto-esqueleto de interface web do DTI/IFC construído com Vue 3 e alinhado ao Design System do GovBR para servir como base de novas telas, fluxos e protótipos institucionais.
 
-Subir o ambiente de desenvolvimento em container e acessar a aplicacao no browser em http://localhost:5173.
+![Vue 3](https://img.shields.io/badge/Vue-3-42b883?logo=vuedotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178c6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)
+![MIT License](https://img.shields.io/badge/License-MIT-green.svg)
+![Docker](https://img.shields.io/badge/Docker-enabled-2496ed?logo=docker&logoColor=white)
 
-## Pre-requisitos
+## Índice
 
-1. Docker instalado e funcionando.
-2. Docker Compose habilitado (comando docker compose).
-3. Porta 5173 livre na maquina.
+- [Descrição do projeto](#descrição-do-projeto)
+- [Status do projeto](#status-do-projeto)
+- [Funcionalidades e demonstração da aplicação](#funcionalidades-e-demonstração-da-aplicação)
+- [Acesso ao projeto](#acesso-ao-projeto)
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
+- [Pessoas contribuidoras](#pessoas-contribuidoras)
+- [Pessoas desenvolvedoras do projeto](#pessoas-desenvolvedoras-do-projeto)
+- [Licença](#licença)
 
-## Como subir os containers
+## Descrição do Projeto
 
-1. Entre na pasta do projeto.
+Este repositório reúne um esqueleto de site institucional para o DTI/IFC com visual e componentes baseados no GovBR, além de recursos de navegação, cards, formulários, tabelas e layout responsivo. A proposta é oferecer um ponto de partida consistente para evolução de serviços internos, páginas de apoio e experiências orientadas ao cidadão e ao servidor.
 
-```bash
-cd /caminho/para/vue-govbr-if
-```
+O projeto já nasce com estrutura de rotas, layout base, carregamento global durante a navegação e componentes reutilizáveis para acelerar a construção de novas telas.
 
-2. Suba o servico em modo foreground (para ver logs).
+## Status do Projeto
+
+**Em desenvolvimento.**
+
+O núcleo da aplicação está estruturado e funcional para demonstração, mas ainda há áreas previstas para evolução, refinamento visual e integração com serviços reais, como a autenticação gov.br.
+
+## Funcionalidades e Demonstração da Aplicação
+
+As rotas atuais demonstram diferentes padrões de interface do projeto:
+
+- Página inicial com chamada de ação para entrada com gov.br e lista de serviços do IFC.
+- Página de banners com carrossel demonstrando conteúdo promocional ou informativo.
+- Página de cards com estados hover, disabled e slots com botão, imagem e data.
+- Página de formulário com componente dedicado para captura de dados.
+- Tabela simples para listagem objetiva de registros.
+- Tabela complexa com seleção, ações e detalhes de usuários.
+- Dashboard administrativo com visão geral, atividades recentes e ações rápidas.
+- Página de exemplo para explorar serviços e atalhos institucionais.
+- Rota de página não encontrada para tratamento de navegação inválida.
+
+Além disso, o layout global inclui indicador de carregamento durante a troca de rotas, breadcrumb semântico e base visual com componentes do GovBR.
+
+## Acesso ao Projeto
+
+### Com Docker
+
+O projeto foi preparado para subir em container e disponibilizar a aplicação em `http://localhost:5173`.
 
 ```bash
 docker compose up --build
 ```
 
-3. Aguarde a instalacao das dependencias e a mensagem do Vite indicando que o servidor iniciou.
-
-4. Abra no browser:
-
-http://localhost:5173
-
-## Rodar em background
-
-Se quiser deixar o terminal livre:
+Se preferir manter o terminal livre:
 
 ```bash
 docker compose up -d --build
 ```
 
-Para acompanhar logs:
+Para acompanhar os logs:
 
 ```bash
 docker compose logs -f app
 ```
 
-## Como parar o ambiente
-
-Parar e remover os containers:
+Para encerrar o ambiente:
 
 ```bash
 docker compose down
 ```
 
-## Comandos uteis
+### Sem Docker
 
-Ver status dos containers:
-
-```bash
-docker compose ps
-```
-
-Reiniciar apenas o app:
+Para executar localmente com Node.js compatível com o projeto:
 
 ```bash
-docker compose restart app
+npm install
+npm run dev
 ```
 
-Recriar do zero (build limpo):
+Depois, acesse:
 
-```bash
-docker compose down
-docker compose up --build
+```text
+http://localhost:5173
 ```
 
-## Problemas comuns
+## Tecnologias utilizadas
 
-1. Porta 5173 ocupada
+- Vue 3
+- TypeScript
+- Vite
+- Vue Router
+- GovBR Design System (`@govbr-ds/core`, `@govbr-ds/webcomponents`, `@govbr-ds/webcomponents-vue`)
+- Bootstrap 5
+- Vitest
+- Cypress
+- Docker e Docker Compose
 
-- Erro comum: bind: address already in use.
-- Solucao: parar o processo que usa a porta ou trocar o mapeamento no arquivo docker-compose.yml.
+## Pessoas Contribuidoras
 
-2. Browser abre, mas pagina nao carrega
+- Arthur Manenti
+- Tiago Heineck
 
-- Verifique se o container esta em execucao com docker compose ps.
-- Veja logs com docker compose logs -f app.
-- Confirme que esta acessando http://localhost:5173.
+## Pessoas Desenvolvedoras do Projeto
 
-3. Dependencias quebradas no container
+- Arthur Manenti
+- Tiago Heineck
 
-- Rode um rebuild completo:
+## Licença
 
-```bash
-docker compose down
-docker compose up --build
-```
+Este projeto está licenciado sob a [MIT License](LICENSE).
 
-## Estrutura Docker usada no projeto
+---
 
-- Dockerfile: usa imagem node:24.14.1-slim.
-- docker-compose.yml: publica 5173:5173 e monta o codigo em /app.
-- .docker/entrypoint.sh: executa npm install e inicia Vite com host 0.0.0.0 na porta 5173.
+Se você for evoluir este esqueleto para produção, o próximo passo natural é documentar variáveis de ambiente, fluxos de autenticação e critérios de publicação por ambiente.
