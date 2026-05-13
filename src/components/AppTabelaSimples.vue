@@ -1,26 +1,5 @@
 <template>
-  <h3>Feito Manualmente</h3>
-  <div>
-    <table>
-      <thead>
-        <tr>
-          <th v-for="header in headers" :key="header.key">
-            {{ header.label }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in data" :key="index">
-          <td v-for="header in headers" :key="header.key">
-            {{ item[header.key] }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
-  <br />
-  <br />
 
   <h3>Feito com Web Components</h3>
   <br-table has-row-divider column-width="fill" overflow="truncate">
