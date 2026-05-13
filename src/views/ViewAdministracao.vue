@@ -1,10 +1,6 @@
 <template>
   <main>
-
-
     <h1 class="mb-4">Visão Geral</h1>
-
-
 
     <div class="br-card">
       <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
@@ -38,18 +34,18 @@
     <section>
       <br-card>
         <h2>Ações rápidas</h2>
-        <ContainerBotoes>
+        <AppContainerBotoes>
           <br-button emphasis="secondary">Gerenciar usuarios</br-button>
           <br-button emphasis="secondary">Aprovar solicitacoes</br-button>
           <br-button emphasis="secondary">Ver auditoria</br-button>
-        </ContainerBotoes>
+        </AppContainerBotoes>
       </br-card>
     </section>
   </main>
 </template>
 
 <script setup lang="ts">
-import ContainerBotoes from '@/components/ContainerBotoes.vue'
+import AppContainerBotoes from '@/components/AppContainerBotoes.vue'
 
 const logs = [
   {

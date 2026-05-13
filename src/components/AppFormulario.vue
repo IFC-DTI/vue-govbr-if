@@ -261,7 +261,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import ContainerBotoes from './ContainerBotoes.vue'
+import ContainerBotoes from './AppContainerBotoes.vue'
 
 interface FormularioData {
   nome: string

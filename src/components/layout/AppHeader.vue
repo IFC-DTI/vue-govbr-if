@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import InputWithIcon from '@/components/InputWithIcon.vue'
+import AppInputWithIcon from '@/components/AppInputWithIcon.vue'
 </script>
 
 <template>
@@ -28,7 +28,7 @@ import InputWithIcon from '@/components/InputWithIcon.vue'
       </br-header-function>
     </br-header-list>
 
-    <InputWithIcon
+    <AppInputWithIcon
       placeholder="O que você procura?"
       action-label="Buscar"
       density="large"

@@ -30,7 +30,7 @@
     <div class="row my-5">
       <div class="col">
         <p class="h5 text-semi-bold">Aproveite para fazer uma nova busca</p>
-        <InputWithIcon
+        <AppInputWithIcon
           placeholder="O que você procura?"
           action-label="Buscar"
           density="large"
@@ -68,7 +68,7 @@
 
 <script setup lang="ts">
 import AppModal from '@/components/AppModal.vue'
-import InputWithIcon from '@/components/InputWithIcon.vue'
+import AppInputWithIcon from '@/components/AppInputWithIcon.vue'
 import { ref } from 'vue'
 import { useRouter, type Router } from 'vue-router'
 

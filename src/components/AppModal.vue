@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import ContainerBotoes from './ContainerBotoes.vue'
+import ContainerBotoes from './AppContainerBotoes.vue'
 
 interface Props {
   isShowingModal: boolean
