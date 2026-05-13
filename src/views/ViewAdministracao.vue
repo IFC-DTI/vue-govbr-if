@@ -253,10 +253,7 @@ const handleSystemSettings = () => {
 }
 
 .stat-card {
-  padding: 2rem !important;
   text-align: center;
-  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
-  border: 1px solid #e0e0e0;
 }
 
 .stat-content {
