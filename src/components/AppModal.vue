@@ -55,17 +55,37 @@
 <script setup lang="ts">
 import ContainerBotoes from './AppContainerBotoes.vue'
 
+/**
+ * Detalhe do evento de fechamento do modal
+ * @interface ModalCloseDetail
+ */
+interface ModalCloseDetail {
+  readonly close: () => void
+}
+
+/**
+ * Props para o componente AppModal
+ * @interface Props
+ * @property {boolean} isShowingModal - Controla se o modal está visível
+ */
 interface Props {
-  isShowingModal: boolean
+  readonly isShowingModal: boolean
 }
 
 defineProps<Props>()
 
+/**
+ * Definição dos eventos emitidos pelo componente
+ */
 const emit = defineEmits<{
   fecharModal: []
 }>()
 
-const handleModalClose = (event: CustomEvent<{ close: () => void }> | Event) => {
+/**
+ * Manipula o fechamento do modal
+ * @param event - Evento de fechamento do modal
+ */
+const handleModalClose = (event: CustomEvent<ModalCloseDetail> | Event): void => {
   // Sempre permitir que o modal feche quando solicitado (X, scrim ou botão)
   if (event instanceof CustomEvent && event.detail?.close) {
     event.detail.close()
@@ -74,6 +94,9 @@ const handleModalClose = (event: CustomEvent<{ close: () => void }> | Event) => 
   emit('fecharModal')
 }
 
+/**
+ * Envia o feedback e fecha o modal
+ */
 const enviarFeedback = (): void => {
   // Aqui você pode adicionar lógica para enviar feedback
   // Por enquanto, apenas fecha o modal

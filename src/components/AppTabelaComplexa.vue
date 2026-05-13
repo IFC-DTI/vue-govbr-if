@@ -191,23 +191,46 @@
 </template>
 
 <script setup lang="ts" generic="T extends Record<string, any>">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, type Ref, type ComputedRef } from 'vue'
 
+/**
+ * Tipo de densidade da tabela
+ */
+type DensityType = 'small' | 'medium' | 'large'
+
+/**
+ * Cabeçalho da tabela
+ * @interface TableHeader
+ * @property {string} label - Rótulo do cabeçalho
+ * @property {string} key - Chave para acessar o dado na linha
+ */
 interface TableHeader {
-  label: string
-  key: string
+  readonly label: string
+  readonly key: string
 }
 
+/**
+ * Props para o componente AppTabelaComplexa
+ * @interface Props
+ * @property {string} title - Título da tabela
+ * @property {TableHeader[]} headers - Array de cabeçalhos
+ * @property {T[]} data - Array de dados a exibir
+ * @property {string} [expandableKey] - Chave do campo expansível (default: 'details')
+ */
 interface Props {
-  title: string
-  headers: TableHeader[]
-  data: T[]
-  expandableKey?: string
+  readonly title: string
+  readonly headers: readonly TableHeader[]
+  readonly data: readonly T[]
+  readonly expandableKey?: string
 }
 
+/**
+ * Detalhe do evento de mudança de página
+ * @interface PageChangeDetail
+ */
 interface PageChangeDetail {
-  current?: number
-  page?: number
+  readonly current?: number
+  readonly page?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -220,26 +243,26 @@ const emit = defineEmits<{
 }>()
 
 // State
-const tableContainer = ref<HTMLDivElement | null>(null)
-const checkAllInput = ref<HTMLInputElement | null>(null)
-const tableId = ref(`table-${Math.random().toString(36).substr(2, 9)}`)
-const density = ref<'small' | 'medium' | 'large'>('medium')
-const showSearch = ref(false)
-const searchQuery = ref('')
-const selectedRows = ref<Set<string | number>>(new Set())
-const expandedRows = ref<Set<string | number>>(new Set())
-const currentPage = ref(1)
-const itemsPerPage = ref(20)
+const tableContainer: Ref<HTMLDivElement | null> = ref(null)
+const checkAllInput: Ref<HTMLInputElement | null> = ref(null)
+const tableId: Ref<string> = ref(`table-${Math.random().toString(36).substr(2, 9)}`)
+const density: Ref<DensityType> = ref<DensityType>('medium')
+const showSearch: Ref<boolean> = ref(false)
+const searchQuery: Ref<string> = ref('')
+const selectedRows: Ref<Set<string | number>> = ref<Set<string | number>>(new Set())
+const expandedRows: Ref<Set<string | number>> = ref<Set<string | number>>(new Set())
+const currentPage: Ref<number> = ref(1)
+const itemsPerPage: Ref<number> = ref(20)
 
 // Computed
 
-const filteredData = computed(() => {
+const filteredData: ComputedRef<T[]> = computed(() => {
   if (!searchQuery.value.trim()) {
-    return props.data
+    return props.data as T[]
   }
 
   const query = searchQuery.value.toLowerCase()
-  return props.data.filter((row) => {
+  return (props.data as T[]).filter((row) => {
     return props.headers.some((header) => {
       const cellValue = String(row[header.key] || '').toLowerCase()
       return cellValue.includes(query)
@@ -247,46 +270,66 @@ const filteredData = computed(() => {
   })
 })
 
-const paginatedData = computed(() => {
+const paginatedData: ComputedRef<T[]> = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value
   const end = start + itemsPerPage.value
   return filteredData.value.slice(start, end)
 })
 
-const isAllSelected = computed(() => {
+const isAllSelected: ComputedRef<boolean> = computed(() => {
   if (paginatedData.value.length === 0) return false
-  return paginatedData.value.every((row) => selectedRows.value.has(row.id))
+  return paginatedData.value.every((row) => selectedRows.value.has(row['id' as keyof T]))
 })
 
-const isPartiallySelected = computed(() => {
+const isPartiallySelected: ComputedRef<boolean> = computed(() => {
   if (paginatedData.value.length === 0) return false
-  const someSelected = paginatedData.value.some((row) => selectedRows.value.has(row.id))
+  const someSelected = paginatedData.value.some((row) =>
+    selectedRows.value.has(row['id' as keyof T]),
+  )
   return someSelected && !isAllSelected.value
 })
 
 // Methods
-const setDensity = (newDensity: 'small' | 'medium' | 'large') => {
+
+/**
+ * Define a densidade da tabela
+ * @param newDensity - Nova densidade
+ */
+const setDensity = (newDensity: DensityType): void => {
   density.value = newDensity
   closeDensityMenu()
 }
 
-const closeDensityMenu = () => {
+/**
+ * Fecha o menu de densidade
+ */
+const closeDensityMenu = (): void => {
   const menu = tableContainer.value?.querySelector(`#density-menu-${tableId.value}`)
   if (menu) {
     menu.setAttribute('hidden', '')
   }
 }
 
-const toggleSearch = () => {
+/**
+ * Alterna a visibilidade da barra de pesquisa
+ */
+const toggleSearch = (): void => {
   showSearch.value = !showSearch.value
 }
 
-const closeSearch = () => {
+/**
+ * Fecha a barra de pesquisa
+ */
+const closeSearch = (): void => {
   showSearch.value = false
   searchQuery.value = ''
 }
 
-const toggleSelectRow = (rowId: string | number) => {
+/**
+ * Alterna a seleção de uma linha
+ * @param rowId - ID da linha
+ */
+const toggleSelectRow = (rowId: string | number): void => {
   if (selectedRows.value.has(rowId)) {
     selectedRows.value.delete(rowId)
   } else {
@@ -296,33 +339,49 @@ const toggleSelectRow = (rowId: string | number) => {
   emit('selectionChange', selectedRows.value)
 }
 
-const toggleSelectAll = () => {
+/**
+ * Alterna a seleção de todas as linhas
+ */
+const toggleSelectAll = (): void => {
   if (isPartiallySelected.value) {
     paginatedData.value.forEach((row) => {
-      selectedRows.value.delete(row.id)
+      selectedRows.value.delete(row['id' as keyof T])
     })
   } else if (isAllSelected.value) {
     paginatedData.value.forEach((row) => {
-      selectedRows.value.delete(row.id)
+      selectedRows.value.delete(row['id' as keyof T])
     })
   } else {
     paginatedData.value.forEach((row) => {
-      selectedRows.value.add(row.id)
+      selectedRows.value.add(row['id' as keyof T])
     })
   }
   atualizarIndeterminate()
   emit('selectionChange', selectedRows.value)
 }
 
-const atualizarIndeterminate = async () => {
-  checkAllInput.value!.checked = false
+/**
+ * Atualiza o estado indeterminado do checkbox "selecionar tudo"
+ */
+const atualizarIndeterminate = async (): Promise<void> => {
+  if (checkAllInput.value) {
+    checkAllInput.value.checked = false
+  }
 }
 
-const guardaValorInputPesquisa = (e: { target: { value: string } }) => {
+/**
+ * Guarda o valor de pesquisa
+ * @param e - Evento de entrada
+ */
+const guardaValorInputPesquisa = (e: { target: { value: string } }): void => {
   searchQuery.value = e.target.value
 }
 
-const toggleRowExpand = (rowId: string | number) => {
+/**
+ * Alterna a expansão de uma linha
+ * @param rowId - ID da linha
+ */
+const toggleRowExpand = (rowId: string | number): void => {
   if (expandedRows.value.has(rowId)) {
     expandedRows.value.delete(rowId)
   } else {
@@ -330,12 +389,20 @@ const toggleRowExpand = (rowId: string | number) => {
   }
 }
 
-const onPageChange = (event: CustomEvent<PageChangeDetail>) => {
+/**
+ * Manipula mudança de página
+ * @param event - Evento de mudança de página
+ */
+const onPageChange = (event: CustomEvent<PageChangeDetail>): void => {
   const newPage = event.detail?.current || event.detail?.page || currentPage.value
   currentPage.value = newPage
 }
 
-const onPerPageChange = (event: CustomEvent<{ perPage: number }>) => {
+/**
+ * Manipula mudança de itens por página
+ * @param event - Evento de mudança de itens por página
+ */
+const onPerPageChange = (event: CustomEvent<{ perPage: number }>): void => {
   itemsPerPage.value = event.detail?.perPage ?? itemsPerPage.value
   currentPage.value = 1
 }

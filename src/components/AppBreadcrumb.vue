@@ -3,21 +3,27 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, type ComputedRef } from 'vue'
+import { useRoute, type RouteLocationNormalized } from 'vue-router'
 
-type BreadcrumbItem = {
+interface BreadcrumbItem {
   label: string
   url?: string
   active?: boolean
   home?: boolean
 }
 
-const route = useRoute()
+interface RouteMeta {
+  breadcrumb?: string
+}
+
+const route: RouteLocationNormalized = useRoute()
 
 const getCurrentLabel = (): string => {
-  if (typeof route.meta?.breadcrumb === 'string' && route.meta.breadcrumb.length > 0) {
-    return route.meta.breadcrumb
+  const breadcrumb = (route.meta as RouteMeta)?.breadcrumb
+
+  if (typeof breadcrumb === 'string' && breadcrumb.length > 0) {
+    return breadcrumb
   }
 
   if (typeof route.name === 'string' && route.name.length > 0) {
@@ -27,7 +33,7 @@ const getCurrentLabel = (): string => {
   return 'Pagina'
 }
 
-const breadcrumbLinks = computed(() => {
+const breadcrumbLinks: ComputedRef<string> = computed(() => {
   const links: BreadcrumbItem[] = [
     { label: 'Página Inicial', url: '/', home: true, active: route.path === '/' },
   ]

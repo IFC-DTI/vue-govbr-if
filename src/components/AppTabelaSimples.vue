@@ -42,15 +42,27 @@
   </br-table>
 </template>
 
-<script setup lang="ts" generic="T extends Record<string, any>">
+<script setup lang="ts" generic="T extends Record<string, unknown>">
+/**
+ * Cabeçalho da tabela
+ * @interface TableHeader
+ * @property {string} label - Rótulo do cabeçalho
+ * @property {string} key - Chave para acessar o dado na linha
+ */
 interface TableHeader {
-  label: string
-  key: string
+  readonly label: string
+  readonly key: string
 }
 
+/**
+ * Props para o componente AppTabelaSimples
+ * @interface Props
+ * @property {TableHeader[]} headers - Array de cabeçalhos da tabela
+ * @property {T[]} data - Array de dados a exibir na tabela
+ */
 interface Props {
-  headers: TableHeader[]
-  data: T[]
+  readonly headers: readonly TableHeader[]
+  readonly data: readonly T[]
 }
 
 defineProps<Props>()

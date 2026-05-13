@@ -7,12 +7,26 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * Tipo de densidade do item
+ */
+type DensidadeType = 'large' | 'medium' | 'small'
+
+/**
+ * Props para o componente AppItemServico
+ * @interface Props
+ * @property {DensidadeType} [densidade] - Densidade do item (default: 'small')
+ * @property {string} iconName - Nome do ícone a ser exibido
+ * @property {string} link - URL do link do serviço
+ * @property {string} title - Título do serviço
+ * @property {string} description - Descrição do serviço
+ */
 interface Props {
-  densidade?: 'large' | 'medium' | 'small'
-  iconName: string
-  link: string
-  title: string
-  description: string
+  readonly densidade?: DensidadeType
+  readonly iconName: string
+  readonly link: string
+  readonly title: string
+  readonly description: string
 }
 
 defineProps<Props>()

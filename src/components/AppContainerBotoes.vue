@@ -5,11 +5,17 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
-  gap: {
-    type: String,
-    default: '1em',
-  },
+/**
+ * Props para o componente AppContainerBotoes
+ * @interface Props
+ * @property {string} [gap] - Espaçamento entre os botões (default: '1em')
+ */
+interface Props {
+  readonly gap?: string
+}
+
+withDefaults(defineProps<Props>(), {
+  gap: '1em',
 })
 </script>
 

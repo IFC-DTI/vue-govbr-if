@@ -56,28 +56,46 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 
+/**
+ * Item de banner para o carousel
+ * @interface BannerItem
+ * @property {number} id - Identificador único do banner
+ * @property {string} label - Título do banner
+ * @property {string} image - URL da imagem do banner
+ * @property {string} alt - Texto alternativo da imagem
+ * @property {string} [description] - Descrição opcional do banner
+ */
 interface BannerItem {
-  id: number
-  label: string
-  image: string
-  alt: string
-  description?: string
+  readonly id: number
+  readonly label: string
+  readonly image: string
+  readonly alt: string
+  readonly description?: string
 }
 
+/**
+ * Props para o componente AppCarousel
+ * @interface Props
+ * @property {BannerItem[]} banners - Array de banners a serem exibidos
+ * @property {boolean} [circular] - Se o carousel é circular (volta ao início)
+ */
 interface Props {
-  banners: BannerItem[]
-  circular?: boolean
+  readonly banners: BannerItem[]
+  readonly circular?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   circular: false,
 })
 
-const currentIndex = ref(0)
+const currentIndex: Ref<number> = ref(0)
 
-const nextBanner = () => {
+/**
+ * Avança para o próximo banner
+ */
+const nextBanner = (): void => {
   if (currentIndex.value < props.banners.length - 1) {
     currentIndex.value++
   } else if (props.circular) {
@@ -85,7 +103,10 @@ const nextBanner = () => {
   }
 }
 
-const previousBanner = () => {
+/**
+ * Volta para o banner anterior
+ */
+const previousBanner = (): void => {
   if (currentIndex.value > 0) {
     currentIndex.value--
   } else if (props.circular) {

@@ -17,18 +17,39 @@
 <script setup lang="ts">
 import AppItemServico from './AppItemServico.vue'
 
+/**
+ * Tipo de densidade do item
+ */
+type DensidadeType = 'large' | 'medium' | 'small'
+
+/**
+ * Item de serviço
+ * @interface ItemServico
+ * @property {string} id - Identificador único do item
+ * @property {string} iconName - Nome do ícone a ser exibido
+ * @property {string} link - URL do link do serviço
+ * @property {string} title - Título do serviço
+ * @property {string} description - Descrição do serviço
+ */
 interface ItemServico {
-  id: string
-  iconName: string
-  link: string
-  title: string
-  description: string
+  readonly id: string
+  readonly iconName: string
+  readonly link: string
+  readonly title: string
+  readonly description: string
 }
 
+/**
+ * Props para o componente AppSectionItemsServicos
+ * @interface Props
+ * @property {DensidadeType} [densidade] - Densidade dos itens (default: 'small')
+ * @property {ItemServico[]} items - Array de itens de serviço a serem exibidos
+ * @property {string} nomeSessao - Nome da sessão
+ */
 interface Props {
-  densidade?: 'large' | 'medium' | 'small'
-  items: ItemServico[]
-  nomeSessao: string
+  readonly densidade?: DensidadeType
+  readonly items: readonly ItemServico[]
+  readonly nomeSessao: string
 }
 
 defineProps<Props>()

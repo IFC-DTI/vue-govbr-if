@@ -260,31 +260,46 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import ContainerBotoes from './AppContainerBotoes.vue'
 
+/**
+ * Dados do formulário de cadastro
+ * @interface FormularioData
+ */
 interface FormularioData {
-  nome: string
-  email: string
-  telefone: string
-  dataNascimento: string
-  genero: string
-  rua: string
-  numero: string
-  complemento: string
-  cidade: string
-  estado: string
-  descricao: string
-  tipoPerfil: string
-  newsletter: boolean
-  privacidade: boolean
+  readonly nome: string
+  readonly email: string
+  readonly telefone: string
+  readonly dataNascimento: string
+  readonly genero: string
+  readonly rua: string
+  readonly numero: string
+  readonly complemento: string
+  readonly cidade: string
+  readonly estado: string
+  readonly descricao: string
+  readonly tipoPerfil: string
+  readonly newsletter: boolean
+  readonly privacidade: boolean
 }
 
+/**
+ * Mapeamento de erros por campo
+ */
 interface Erros {
   [key: string]: string
 }
 
-const formulario = ref<FormularioData>({
+/**
+ * Opção de seleção para dropdown
+ */
+interface SelectOption {
+  readonly label: string
+  readonly value: string
+}
+
+const formulario: Ref<FormularioData> = ref<FormularioData>({
   nome: '',
   email: '',
   telefone: '',
@@ -301,10 +316,10 @@ const formulario = ref<FormularioData>({
   privacidade: false,
 })
 
-const erros = ref<Erros>({})
-const mostrarSucesso = ref(false)
+const erros: Ref<Erros> = ref<Erros>({})
+const mostrarSucesso: Ref<boolean> = ref(false)
 
-const opcoesGenero = [
+const opcoesGenero: readonly SelectOption[] = [
   { label: 'Selecione...', value: '' },
   { label: 'Masculino', value: 'masculino' },
   { label: 'Feminino', value: 'feminino' },
@@ -312,6 +327,10 @@ const opcoesGenero = [
   { label: 'Prefiro não informar', value: 'nao-informar' },
 ]
 
+/**
+ * Valida um campo específico do formulário
+ * @param campo - Nome do campo a validar
+ */
 const validarCampo = (campo: string): void => {
   const valor = formulario.value[campo as keyof FormularioData]
 
@@ -376,13 +395,22 @@ const validarCampo = (campo: string): void => {
   }
 }
 
+/**
+ * Valida se um email possui formato correto
+ * @param email - Email a validar
+ * @returns true se email é válido, false caso contrário
+ */
 const validarEmail = (email: string): boolean => {
   const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return regexEmail.test(email)
 }
 
+/**
+ * Valida todos os campos obrigatórios do formulário
+ * @returns true se o formulário é válido, false caso contrário
+ */
 const validarFormulario = (): boolean => {
-  const camposObrigatorios = [
+  const camposObrigatorios: readonly string[] = [
     'nome',
     'email',
     'dataNascimento',
@@ -404,6 +432,9 @@ const validarFormulario = (): boolean => {
   return valido
 }
 
+/**
+ * Envia o formulário após validação
+ */
 const enviarFormulario = (): void => {
   if (validarFormulario()) {
     console.log('Formulário válido! Dados:', formulario.value)
@@ -416,6 +447,9 @@ const enviarFormulario = (): void => {
   }
 }
 
+/**
+ * Limpa todos os campos do formulário
+ */
 const limparFormulario = (): void => {
   formulario.value = {
     nome: '',
