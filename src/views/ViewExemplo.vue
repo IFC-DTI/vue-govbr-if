@@ -10,7 +10,8 @@
     </div>
     <div>
       <h4 class="text-primary-default text-center my-5">Serviços para você</h4>
-      <div class="row">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         <AppSectionItemsServicos
           densidade="large"
           :items="itemsVidaAcademica"
@@ -21,22 +22,16 @@
           :items="itemsServidores"
           :nome-sessao="'Servidores'"
         />
-        <div class="col">
-          <div class="row">
-            <AppSectionItemsServicos
-              densidade="large"
-              :items="itemsMaisServicos"
-              :nome-sessao="'Mais Serviços'"
-            />
-          </div>
-          <div class="row mt-5">
-            <AppSectionItemsServicos
-              densidade="large"
-              :items="itemsExperimental"
-              :nome-sessao="'Mais Serviços'"
-            />
-          </div>
-        </div>
+        <AppSectionItemsServicos
+          densidade="large"
+          :items="itemsMaisServicos"
+          :nome-sessao="'Mais Serviços'"
+        />
+        <AppSectionItemsServicos
+          densidade="large"
+          :items="itemsExperimental"
+          :nome-sessao="'Mais Serviços'"
+        />
       </div>
     </div>
   </main>
