@@ -36,6 +36,7 @@ import AppInputWithIcon from '@/components/AppInputWithIcon.vue'
       :highlight="true"
     />
 
+    // https://govbr-ds.gitlab.io/bibliotecas/wbc/govbr-ds-wbc/docs/components/sign-in/
     <br-sign-in slot="access" label="Entrar" density="small">
       <br-icon slot="icon" icon-name="fa6-solid:user"></br-icon>
       Entrar
