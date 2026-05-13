@@ -1,5 +1,5 @@
 <template>
-  <div class="col">
+  <div class="col mt-4">
     <p class="text-weight-semi-bold">{{ nomeSessao }}</p>
     <br-divider />
     <AppItemServico
