@@ -23,7 +23,9 @@
 import souIfcLogo from '@/assets/sou-ifc-logo.png'
 
 const entrarComGovBr = (): void => {
-  // TODO: Implementar redirecionamento para autenticação gov.br
+  // TODO: Implementar autenticação via gov.br
+  // Exemplo: redirecionar para servidor de autenticação ou abrir popup
+  console.log('Iniciando autenticação gov.br...')
 }
 </script>
 

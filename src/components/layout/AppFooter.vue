@@ -5,13 +5,14 @@
       src="/assets/images/Logo_IFC_horizontal.png"
       description="Logo do Site"
     ></br-footer-logo>
-    <br-footer-category label="Categoria">
-      <br-footer-item>Texto pequeno</br-footer-item>
-      <br-footer-item>Texto longo com quebra de linha</br-footer-item>
+    <!-- TODO: Substituir conteúdo placeholder do footer com dados reais -->
+    <br-footer-category label="Sobre">
+      <br-footer-item>Quem somos</br-footer-item>
+      <br-footer-item>Contato e informações de suporte</br-footer-item>
     </br-footer-category>
-    <br-footer-category label="Categoria">
-      <br-footer-item>Texto pequeno</br-footer-item>
-      <br-footer-item>Texto longo com quebra de linha</br-footer-item>
+    <br-footer-category label="Recursos">
+      <br-footer-item>Documentação</br-footer-item>
+      <br-footer-item>Políticas e Termos de Uso</br-footer-item>
     </br-footer-category>
 
     <br-footer-social

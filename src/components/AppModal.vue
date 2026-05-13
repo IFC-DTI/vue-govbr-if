@@ -75,8 +75,8 @@ const handleModalClose = (event: CustomEvent<{ close: () => void }> | Event) => 
 }
 
 const enviarFeedback = (): void => {
-  // Aqui você pode adicionar lógica para enviar feedback
-  // Por enquanto, apenas fecha o modal
+  // TODO: Implementar envio real de feedback (API/backend)
+  // Atualmente apenas placeholder
   console.log('Feedback enviado')
   emit('fecharModal')
 }

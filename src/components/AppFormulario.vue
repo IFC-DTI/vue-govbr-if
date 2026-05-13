@@ -406,7 +406,9 @@ const validarFormulario = (): boolean => {
 
 const enviarFormulario = (): void => {
   if (validarFormulario()) {
-    console.log('Formulário válido! Dados:', formulario.value)
+    // TODO: Implementar envio real do formulário (API/backend)
+    // Atualmente apenas log de validação
+    console.log('Formulário válido! Pronto para envio:', formulario.value)
     mostrarSucesso.value = true
 
     // Simular envio ao servidor

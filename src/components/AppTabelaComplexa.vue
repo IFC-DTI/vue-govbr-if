@@ -271,10 +271,8 @@ const setDensity = (newDensity: 'small' | 'medium' | 'large') => {
 }
 
 const closeDensityMenu = () => {
-  const menu = tableContainer.value?.querySelector(`#density-menu-${tableId.value}`)
-  if (menu) {
-    menu.setAttribute('hidden', '')
-  }
+  // TODO: Implementar lógica para fechar menu de densidade
+  // Selector do DOM não encontrado no template atual
 }
 
 const toggleSearch = () => {
@@ -314,8 +312,12 @@ const toggleSelectAll = () => {
   emit('selectionChange', selectedRows.value)
 }
 
-const atualizarIndeterminate = async () => {
-  checkAllInput.value!.checked = false
+const atualizarIndeterminate = () => {
+  if (!checkAllInput.value) return
+
+  // Atualizar checkbox com base no estado de seleção
+  checkAllInput.value.checked = isAllSelected.value
+  checkAllInput.value.indeterminate = isPartiallySelected.value
 }
 
 const guardaValorInputPesquisa = (e: { target: { value: string } }) => {

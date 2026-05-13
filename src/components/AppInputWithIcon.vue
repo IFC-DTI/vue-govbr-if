@@ -12,6 +12,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 defineProps<{
   placeholder?: string
   actionLabel?: string
@@ -20,11 +22,11 @@ defineProps<{
   highlight?: boolean
 }>()
 
-import { ref } from 'vue'
-
 const valueInput = ref('')
 
 const handleSearch = () => {
-  alert('Busca realizada: ' + valueInput.value)
+  // TODO: Implementar lógica real de busca
+  // Atualmente apenas placeholder
+  console.log('Busca realizada:', valueInput.value)
 }
 </script>
