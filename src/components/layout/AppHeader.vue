@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import AppInputWithIcon from '@/components/AppInputWithIcon.vue'
+import { useDarkMode } from '@/composables/useDarkMode'
+
+const { isDarkMode, toggle } = useDarkMode()
 </script>
 
 <template>
@@ -17,17 +20,17 @@ import AppInputWithIcon from '@/components/AppInputWithIcon.vue'
       <br-header-link href="/administracao">Administração</br-header-link>
     </br-header-list>
 
-    <!-- TODO: Implementar funcionalidades do sistema reais -->
-    <!-- <br-header-list slot="functions" list-title="Funcionalidades do Sistema">
-      <br-header-function href="#">
-        <br-icon slot="icon" icon-name="fa7-solid:chart-column"></br-icon>
-        Funcionalidade 1
+    <br-header-list slot="functions" list-title="Funcionalidades do Sistema">
+      <br-header-function
+        href="javascript:void(0)"
+        @click.prevent="toggle"
+        :title="`Alternar para modo ${isDarkMode ? 'claro' : 'escuro'}`"
+        aria-label="Alternar modo escuro"
+      >
+        <br-icon slot="icon" icon-name="fa:adjust"></br-icon>
+        {{ isDarkMode ? 'Modo Claro' : 'Modo Escuro' }}
       </br-header-function>
-      <br-header-function href="#">
-        <br-icon slot="icon" icon-name="fa7-solid:headphones-simple"></br-icon>
-        Funcionalidade 2
-      </br-header-function>
-    </br-header-list> -->
+    </br-header-list>
 
     <AppInputWithIcon
       placeholder="O que você procura?"

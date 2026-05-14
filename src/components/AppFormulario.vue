@@ -1,5 +1,5 @@
 <template>
-  <div class="container-lg py-5 bg-secondary-03">
+  <div class="form-container container-lg py-5">
     <div class="row">
       <div class="col-lg-8 mx-auto">
         <!-- Header -->
@@ -441,6 +441,43 @@ const limparFormulario = (): void => {
 </script>
 
 <style scoped>
+/* Container com background adaptável */
+.form-container {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Header do formulário */
+.form-container h1,
+.form-container h2,
+.form-container h3,
+.form-container h4,
+.form-container h5,
+.form-container h6 {
+  color: var(--color-text-primary);
+}
+
+/* Parágrafos com classe text-muted */
+.form-container .text-muted {
+  color: var(--color-text-secondary);
+}
+
+/* Textos de erro */
+.form-container .text-danger {
+  color: var(--color-error);
+}
+
+/* Legend com border e cor primária */
+.form-container legend.text-primary {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-border);
+  transition: border-color 0.3s ease;
+}
+
+/* Fieldset padrão */
 fieldset {
   border: none;
   padding: 0;
@@ -452,5 +489,11 @@ legend {
   width: 100%;
   padding: 0;
   margin: 0;
+}
+
+/* Styles para small (mensagens de erro) */
+small.text-danger {
+  color: var(--color-error);
+  transition: color 0.3s ease;
 }
 </style>

@@ -23,5 +23,6 @@ br-item,
 p {
   font-size: 1em;
   margin: 0;
+  color: #000 !important;
 }
 </style>

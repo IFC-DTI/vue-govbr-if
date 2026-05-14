@@ -222,6 +222,9 @@ const handleSystemSettings = () => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .header-section {
@@ -232,12 +235,12 @@ const handleSystemSettings = () => {
 .header-section h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  color: #1f1f1f;
+  color: var(--color-text-primary);
 }
 
 .subtitle {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
@@ -253,7 +256,11 @@ const handleSystemSettings = () => {
 }
 
 .stat-card {
+  padding: 2rem !important;
   text-align: center;
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-elevated) 100%);
+  border: 1px solid var(--color-border-light);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .stat-content {
@@ -265,12 +272,12 @@ const handleSystemSettings = () => {
 .stat-number {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #0050a4;
+  color: var(--color-primary);
 }
 
 .stat-label {
   font-size: 0.95rem;
-  color: #666;
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
@@ -281,7 +288,7 @@ const handleSystemSettings = () => {
 
 .users-section h2 {
   margin-bottom: 1.5rem;
-  color: #1f1f1f;
+  color: var(--color-text-primary);
   font-size: 1.5rem;
 }
 
@@ -297,29 +304,32 @@ const handleSystemSettings = () => {
 .br-table caption {
   text-align: left;
   padding: 1rem;
-  background-color: #f5f5f5;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
   font-weight: 500;
   font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .br-table thead {
-  background-color: #f0f0f0;
+  background-color: var(--color-surface-elevated);
 }
 
 .br-table th,
 .br-table td {
   padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--color-border-light);
+  transition: border-color 0.3s ease;
 }
 
 .br-table th {
   font-weight: 600;
-  color: #1f1f1f;
+  color: var(--color-text-terciary);
 }
 
 .br-table tbody tr:hover {
-  background-color: #fafafa;
+  background-color: var(--color-hover);
 }
 
 .user-badge,
@@ -328,31 +338,32 @@ const handleSystemSettings = () => {
   border-radius: 4px;
   font-size: 0.85rem;
   font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .user-badge.admin {
-  background-color: #e3f2fd;
-  color: #0050a4;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
 }
 
 .user-badge.editor {
-  background-color: #f3e5f5;
+  background-color: rgba(106, 27, 154, 0.1);
   color: #6a1b9a;
 }
 
 .user-badge.viewer {
-  background-color: #e8f5e9;
+  background-color: rgba(46, 125, 50, 0.1);
   color: #2e7d32;
 }
 
 .status-badge.active {
-  background-color: #c8e6c9;
-  color: #1b5e20;
+  background-color: rgba(76, 175, 80, 0.2);
+  color: var(--color-success);
 }
 
 .status-badge.inactive {
-  background-color: #ffccbc;
-  color: #bf360c;
+  background-color: rgba(244, 67, 54, 0.2);
+  color: var(--color-error);
 }
 
 /* ACTIONS SECTION */
@@ -362,7 +373,7 @@ const handleSystemSettings = () => {
 
 .actions-section h2 {
   margin-bottom: 1.5rem;
-  color: #1f1f1f;
+  color: var(--color-text-primary);
   font-size: 1.5rem;
 }
 
@@ -387,7 +398,7 @@ const handleSystemSettings = () => {
 
 .action-description {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 1.4;
 }
 
@@ -395,9 +406,10 @@ const handleSystemSettings = () => {
 .notification {
   padding: 1rem;
   border-radius: 4px;
-  background-color: #e8f5e9;
-  color: #1b5e20;
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--color-success);
   font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @media (max-width: 768px) {

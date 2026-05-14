@@ -19,3 +19,11 @@ withDefaults(defineProps<Props>(), {
   disabled: false,
 })
 </script>
+
+<style scoped>
+br-card {
+  h5, p {
+    color: #000 !important;
+  }
+}
+</style>

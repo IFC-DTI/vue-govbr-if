@@ -63,18 +63,22 @@ import CollapseMenu from './CollapseMenu.vue'
 }
 
 .menu-content {
-  background-color: #fff;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
   width: 20%;
   height: 100%;
   z-index: 500;
   position: absolute;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 .menu-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1em 1em;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid var(--color-border-light);
+  transition: border-color 0.3s ease;
   img {
     max-width: 100px;
   }
@@ -85,9 +89,10 @@ import CollapseMenu from './CollapseMenu.vue'
   min-width: 2em;
   min-height: 2em;
   border-radius: 50%;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
   &:hover {
-    background-color: #c5d4eb;
-    box-shadow: 0 0 0 2px #b4c8e6;
+    background-color: var(--color-hover);
+    box-shadow: 0 0 0 2px var(--color-selected);
   }
 }
 </style>
