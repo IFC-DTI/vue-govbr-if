@@ -44,12 +44,14 @@ import CollapseMenu from './CollapseMenu.vue'
 * {
   color: #2864ae;
 }
+
 .menu {
   position: fixed;
   inset: 0;
   z-index: 1000;
   height: 100dvh;
   width: 100vw;
+  display: flex;
 }
 
 .fundo-menu {
@@ -60,6 +62,7 @@ import CollapseMenu from './CollapseMenu.vue'
   width: 100%;
   height: 100%;
   background-color: #a1a1a1a7;
+  transition: opacity 0.3s ease;
 }
 
 .menu-content {
@@ -68,13 +71,20 @@ import CollapseMenu from './CollapseMenu.vue'
   height: 100%;
   z-index: 500;
   position: absolute;
+  transition: background-color 0.3s ease, width 0.3s ease;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
+
 .menu-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1em 1em;
   border-bottom: 1px solid #cccccc;
+  flex-shrink: 0;
+
   img {
     max-width: 100px;
   }
@@ -85,9 +95,54 @@ import CollapseMenu from './CollapseMenu.vue'
   min-width: 2em;
   min-height: 2em;
   border-radius: 50%;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
   &:hover {
     background-color: #c5d4eb;
     box-shadow: 0 0 0 2px #b4c8e6;
+  }
+}
+
+/* Tablet: 768px até 991px */
+@media (max-width: 991px) {
+  .menu-content {
+    width: 40%;
+  }
+}
+
+/* Mobile: até 767px */
+@media (max-width: 767px) {
+  .menu-content {
+    width: 100%;
+  }
+
+  .fundo-menu {
+    background-color: transparent;
+    display: none;
+  }
+
+  .menu-header {
+    padding: 1rem;
+  }
+
+  .menu-header img {
+    max-width: 80px;
+  }
+}
+
+/* Extra small devices: até 576px */
+@media (max-width: 575px) {
+  .menu-header {
+    padding: 0.75rem;
+  }
+
+  .menu-header img {
+    max-width: 70px;
+  }
+
+  .close {
+    min-width: 1.75em;
+    min-height: 1.75em;
   }
 }
 </style>

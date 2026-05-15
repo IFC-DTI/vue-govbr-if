@@ -88,7 +88,34 @@ interface Props {
 </script>
 
 <style scoped>
+.br-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
 .br-item {
   cursor: pointer;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+}
+
+.sub-menu-container {
+  background-color: #f5f5f5;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .br-item {
+    padding: 0.65rem 0.875rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #cccccc;
+  }
+}
+
+@media (max-width: 575px) {
+  .br-item {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+  }
 }
 </style>
