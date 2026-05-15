@@ -99,10 +99,6 @@ interface Props {
   font-size: 0.95rem;
 }
 
-.sub-menu-container {
-  background-color: #f5f5f5;
-}
-
 /* Mobile adjustments */
 @media (max-width: 767px) {
   .br-item {
