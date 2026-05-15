@@ -90,12 +90,16 @@ interface Props {
   background-color: var(--color-surface);
   color: var(--color-text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .br-item {
   cursor: pointer;
   color: var(--color-text-primary);
   transition: background-color 0.2s ease, color 0.2s ease;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
 }
 
 .menu-item {
@@ -121,5 +125,24 @@ a {
 
 router-link {
   color: inherit;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .br-item {
+    padding: 0.65rem 0.875rem;
+    font-size: 0.9rem;
+  }
+
+  .menu-item {
+    border-bottom: 1px solid var(--color-border-light);
+  }
+}
+
+@media (max-width: 575px) {
+  .br-item {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+  }
 }
 </style>
