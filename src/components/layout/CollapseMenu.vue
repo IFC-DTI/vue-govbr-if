@@ -106,21 +106,11 @@ interface Props {
   background-color: transparent;
 }
 
-.menu-item.menu-item-hover {
-  background-color: var(--color-hover);
-}
-
-.sub-menu-container {
-  background-color: var(--color-surface-elevated);
-}
 
 a {
   color: var(--color-text-primary);
   text-decoration: none;
 
-  &:hover {
-    color: var(--color-primary);
-  }
 }
 
 router-link {

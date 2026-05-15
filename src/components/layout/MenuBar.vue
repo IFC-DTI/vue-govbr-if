@@ -23,8 +23,18 @@ import CollapseMenu from './CollapseMenu.vue'
               { id: 1, label: 'Cards', link: '/cards', icon: 'fas fa-arrow-right' },
               { id: 2, label: 'Banner', link: '/banner', icon: 'fas fa-arrow-right' },
               { id: 3, label: 'Exemplo', link: '/exemplo', icon: 'fas fa-arrow-right' },
-              { id: 4, label: 'Tabela Simples', link: '/tabela-simples', icon: 'fas fa-arrow-right' },
-              { id: 5, label: 'Tabela Complexa', link: '/tabela-complexa', icon: 'fas fa-arrow-right' },
+              {
+                id: 4,
+                label: 'Tabela Simples',
+                link: '/tabela-simples',
+                icon: 'fas fa-arrow-right',
+              },
+              {
+                id: 5,
+                label: 'Tabela Complexa',
+                link: '/tabela-complexa',
+                icon: 'fas fa-arrow-right',
+              },
               { id: 6, label: 'Formulário', link: '/formulario', icon: 'fas fa-arrow-right' },
             ],
           },
@@ -72,7 +82,10 @@ import CollapseMenu from './CollapseMenu.vue'
   height: 100%;
   z-index: 500;
   position: absolute;
-  transition: background-color 0.3s ease, color 0.3s ease, width 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    width 0.3s ease;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -97,12 +110,9 @@ import CollapseMenu from './CollapseMenu.vue'
   min-width: 2em;
   min-height: 2em;
   border-radius: 50%;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    background-color: var(--color-hover);
-    box-shadow: 0 0 0 2px var(--color-selected);
-  }
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 /* Tablet: 768px até 991px */
